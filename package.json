@@ -1,0 +1,42 @@
+{
+  "name": "mitumba-mobile-ui-workspace",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "typecheck": "turbo run typecheck",
+    "lint": "turbo run lint",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "validate": "npm run format:check && npm run lint && npm run typecheck && npm run build",
+    "showcase": "npm run start --workspace @mitumba/mobile-ui-showcase",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "node scripts/check-release-license.mjs && npm run build && changeset publish",
+    "pack:ui": "npm pack --workspace @mitumba/mobile-ui --dry-run",
+    "verify:package": "node scripts/verify-package.mjs"
+  },
+  "devDependencies": {
+    "@changesets/cli": "3.0.2",
+    "@eslint/js": "10.0.1",
+    "eslint": "10.10.0",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "globals": "17.12.0",
+    "prettier": "3.9.6",
+    "turbo": "2.10.12",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.70.0",
+    "validate-npm-package-license": "3.0.4"
+  },
+  "packageManager": "npm@12.0.2",
+  "engines": {
+    "node": "^24.3.0",
+    "npm": "^12.0.0"
+  }
+}
