@@ -1,0 +1,14 @@
+{
+  "expo": {
+    "name": "Mitumba Mobile UI Showcase",
+    "slug": "mitumba-mobile-ui-showcase",
+    "version": "0.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "web": {
+      "bundler": "metro",
+      "output": "single"
+    }
+  }
+}
