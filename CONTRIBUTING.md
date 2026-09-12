@@ -4,20 +4,26 @@
 
 Read, in order:
 
-1. `AGENTS.md`
-2. `docs/ARCHITECTURE.md`
-3. `docs/COMPATIBILITY.md`
-4. `docs/RELEASING.md`
-5. The issue or task being implemented
+1. `docs/ISSUE_WORKFLOW.md`
+2. `docs/DEVELOPMENT_PROGRAM.md`
+3. `docs/ARCHITECTURE.md`
+4. `docs/COMPATIBILITY.md`
+5. `docs/RELEASING.md`
+6. The approved issue being implemented
+
+Automated agents must also comply with `AGENTS.md`. An implementation issue must carry `status:ready` and `agent:eligible`, have every implementation dependency merged into the default branch and every decision dependency approved, and be explicitly assigned in the active session before work begins.
 
 ## Workflow
 
-- Branch from current `main`.
-- Use lowercase, hyphenated branches; agent branches start with `agent/`.
-- Keep one component or one concern per branch.
+- Branch from current `main` using `agent/issue-<number>-<slug>` for agent work.
+- Keep one issue, component, or engineering concern per branch and implementation pull request.
+- Include `Closes #<number>` in every implementation pull request; do not use one PR to close a release tracker or unrelated issues.
+- Do not stack a new issue branch on an unmerged implementation branch.
+- Follow the repository work-in-progress limit in `docs/ISSUE_WORKFLOW.md`.
 - Use Conventional Commits with a package or component scope.
 - Preserve atomic commits and merge pull requests with normal merge commits.
 - Never push directly to `main`.
+- Never merge a generated release pull request until its slice tracker is `status:release-ready` and a human explicitly authorizes the merge.
 
 Examples:
 
