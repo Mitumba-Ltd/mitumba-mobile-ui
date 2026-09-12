@@ -28,7 +28,7 @@ Do not edit package versions or changelogs manually. Do not run Changesets versi
 
 Before recommending a release, verify:
 
-- every required issue in the active slice tracker is closed by its own reviewed PR;
+- every implementation issue in the active slice tracker is closed by its own reviewed normal-merged PR, and every decision issue has its approved comment and prescribed closure record;
 - the result is still one coherent capability within the approved release budget;
 - every public change has the correct Changeset and the generated semantic version is expected;
 - public exports, generated declarations, consumer documentation, and deterministic showcase states are complete;
@@ -39,7 +39,7 @@ Before recommending a release, verify:
 - deferred or follow-up work remains visible in later issues;
 - no dependency, test, compatibility, credential, or scope approval is unresolved.
 
-The agent decides whether the evidence supports a release recommendation and proposes the semantic version. It applies `status:release-ready` plus `human-required` only after the technical audit. Human authorization is a subsequent gate and is not part of technical readiness. Only a human can authorize merging the generated release PR. GitHub Actions—not the agent—performs publication.
+The agent decides whether the evidence supports a release recommendation and proposes the semantic version. It applies `status:release-ready` plus `human-required` only after the technical audit. Human authorization is a subsequent gate and is not part of technical readiness. Queue execution never includes merge permission; only a later, separate user message naming the reviewed release PR may authorize an agent to execute its normal merge. GitHub Actions—not the agent—performs publication.
 
 ## Post-publication transition
 
