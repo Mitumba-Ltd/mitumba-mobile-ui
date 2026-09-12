@@ -81,7 +81,7 @@ Do not start a broad catalog while API or state decisions remain unresolved. A b
 - Foundations may ship before a visible marketplace component when they remove duplication or establish an accessibility contract required by the next slice.
 - Public behavior changes require a Changeset; internal documentation-only planning does not.
 - Test infrastructure or new tests are added only when the task explicitly approves that work.
-- The engineer may prepare implementation PRs and Changesets, but must never merge a release PR, publish npm, or independently expand a release scope.
+- The engineer may prepare implementation PRs and Changesets, but must never merge during queue execution, publish npm, or independently expand release scope. A later separate user message may authorize a normal merge of the specifically named reviewed PR.
 - The engineer owns the evidence-based release-readiness recommendation and proposed semantic version; a human owns release authorization.
 - Changesets may open a release PR after the first public-change PR in a slice. Keep it unmerged until the milestone tracker is `status:release-ready`.
 - Human- or agent-authored commits must be extremely atomic and include:
