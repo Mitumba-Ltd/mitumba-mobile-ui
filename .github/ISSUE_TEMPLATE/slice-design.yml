@@ -68,11 +68,11 @@ body:
       label: Decision deliverables
       placeholder: |
         - [ ] A proposal is posted and the issue moves to `status:needs-decision` plus `human-required`.
-        - [ ] A human approval comment records the selected capability, components, dependencies, and deferrals.
+        - [ ] An accepted approval record from the active user or a currently verified maintainer/admin binds the selected capability, components, dependencies, and deferrals to the current issue-contract fingerprint.
         - [ ] One `status:needs-brief` issue is created per approved component or concern.
         - [ ] The slice tracker and milestone dependency checklist are updated.
         - [ ] Each atomic issue is reviewed separately before receiving `status:ready` and `agent:eligible`.
-        - [ ] This design issue closes from the approved decision record, without an implementation PR.
+        - [ ] This design issue closes from the accepted fingerprint-bound decision record, without an implementation PR.
         - [ ] No implementation starts solely from this design issue.
     validations:
       required: true
