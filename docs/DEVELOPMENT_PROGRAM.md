@@ -8,6 +8,22 @@ The program is intentionally larger than one release and intentionally smaller t
 
 GitHub issues and milestones are the live execution state. This document defines the durable dependency and completion model; it must not be used to bypass an issue contract.
 
+## Live execution map
+
+- [Program tracker #5](https://github.com/Mitumba-Ltd/mitumba-mobile-ui/issues/5)
+- [`0.2.0` milestone](https://github.com/Mitumba-Ltd/mitumba-mobile-ui/milestone/1) and [slice tracker #6](https://github.com/Mitumba-Ltd/mitumba-mobile-ui/issues/6)
+- [`0.3.0` milestone](https://github.com/Mitumba-Ltd/mitumba-mobile-ui/milestone/2) and [slice tracker #7](https://github.com/Mitumba-Ltd/mitumba-mobile-ui/issues/7)
+- [`0.4.0` milestone](https://github.com/Mitumba-Ltd/mitumba-mobile-ui/milestone/3) and [slice tracker #8](https://github.com/Mitumba-Ltd/mitumba-mobile-ui/issues/8)
+- [`0.5.0` milestone](https://github.com/Mitumba-Ltd/mitumba-mobile-ui/milestone/4) and [slice tracker #9](https://github.com/Mitumba-Ltd/mitumba-mobile-ui/issues/9)
+- [`0.6.0` milestone](https://github.com/Mitumba-Ltd/mitumba-mobile-ui/milestone/5) and [slice tracker #10](https://github.com/Mitumba-Ltd/mitumba-mobile-ui/issues/10)
+- [`0.7.0` milestone](https://github.com/Mitumba-Ltd/mitumba-mobile-ui/milestone/6) and [slice tracker #11](https://github.com/Mitumba-Ltd/mitumba-mobile-ui/issues/11)
+- [`0.8.0` milestone](https://github.com/Mitumba-Ltd/mitumba-mobile-ui/milestone/7) and [slice tracker #12](https://github.com/Mitumba-Ltd/mitumba-mobile-ui/issues/12)
+- [`0.9.0` milestone](https://github.com/Mitumba-Ltd/mitumba-mobile-ui/milestone/8) and [slice tracker #13](https://github.com/Mitumba-Ltd/mitumba-mobile-ui/issues/13)
+- [`0.10.0` milestone](https://github.com/Mitumba-Ltd/mitumba-mobile-ui/milestone/9) and [slice tracker #14](https://github.com/Mitumba-Ltd/mitumba-mobile-ui/issues/14)
+- [Extended discovery milestone](https://github.com/Mitumba-Ltd/mitumba-mobile-ui/milestone/10) and [discovery tracker #15](https://github.com/Mitumba-Ltd/mitumba-mobile-ui/issues/15)
+
+Each tracker body owns its canonical issue checklist. A fresh agent session starts from tracker #5 and queries the earliest active milestone rather than relying on copied status in documentation.
+
 ## Program checkpoints
 
 ### Native system foundation
