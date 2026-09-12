@@ -22,7 +22,7 @@ GitHub issues and milestones are the live execution state. This document defines
 - [`0.10.0` milestone](https://github.com/Mitumba-Ltd/mitumba-mobile-ui/milestone/9) and [slice tracker #14](https://github.com/Mitumba-Ltd/mitumba-mobile-ui/issues/14)
 - [Extended discovery milestone](https://github.com/Mitumba-Ltd/mitumba-mobile-ui/milestone/10) and [discovery tracker #15](https://github.com/Mitumba-Ltd/mitumba-mobile-ui/issues/15)
 
-Each tracker body owns its canonical issue checklist. A fresh agent session starts from tracker #5 and queries the earliest active milestone rather than relying on copied status in documentation.
+Each tracker body owns its canonical issue checklist. A fresh agent session starts from tracker #5, verifies the earliest active release tracker's accepted activation fingerprint and repository WIP slots, then queries its eligible milestone children rather than relying on copied status in documentation.
 
 ## Program checkpoints
 
@@ -58,7 +58,7 @@ Expected after orders/trust, seller identity/store, and seller authoring present
 
 Messaging, confirmations and modal patterns, disputes and two-factor-authentication presentation, and VAZI experiences follow the core checkpoints. Each starts with discovery and becomes a numbered release only after its scope forms one coherent capability.
 
-Version numbers are planning targets. The mobile UI engineer proposes the actual semantic version at release readiness from the accumulated public changes; only a later, separate direct active-user instruction naming the reviewed release PR may authorize its normal merge, and GitHub Actions owns OIDC publication.
+Version numbers are planning targets. The mobile UI engineer proposes the actual semantic version at release readiness from the accumulated public changes; only a later, separate direct active-user instruction naming the reviewed release PR and exact head SHA may authorize its normal expected-SHA merge, and GitHub Actions owns OIDC publication.
 
 ## Seeded release slices
 
@@ -169,7 +169,7 @@ For intentionally undefined slices, the design issue must:
 5. create one detailed `status:needs-brief` issue per approved component or foundation concern;
 6. update the slice tracker and milestone;
 7. leave every new issue non-eligible until its individual contract has an accepted fingerprint-bound approval record;
-8. close the design issue from the accepted decision record without an implementation PR.
+8. post and verify the prescribed decision-closure record, then close the design issue without an implementation PR.
 
 This lets the issue program grow continuously without pretending that today's guesses are approved future APIs.
 
@@ -177,10 +177,10 @@ This lets the issue program grow continuously without pretending that today's gu
 
 A checkpoint is reached only when:
 
-- every implementation issue is closed by its own reviewed, normal-merged PR, while every decision issue has its accepted fingerprint-bound approval record and prescribed closure record;
+- every implementation issue is closed by its own reviewed, normal-merged PR after continuous fingerprint checks, while every decision issue has a verified decision-closure record linked to its accepted approval;
 - release trackers and milestones contain no hidden or contradictory scope;
 - all public changes have correct Changesets and deterministic showcase states;
 - accessibility, iOS/Android behavior, dynamic type, reduced motion, and low-end Android constraints are represented;
 - packed-package verification proves the npm artifact works in an isolated Expo consumer;
 - deferred responsibilities remain visible as issues;
-- the release-readiness recommendation, separate direct active-user merge authorization, and GitHub Actions OIDC publication record remain distinct.
+- the release-readiness recommendation, separate exact-PR/exact-SHA active-user merge authorization, and GitHub Actions OIDC publication record remain distinct.
