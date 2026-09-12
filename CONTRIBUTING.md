@@ -66,4 +66,4 @@ Add a Changeset whenever published behavior, API, dependencies, or compatibility
 npm run changeset
 ```
 
-Showcase-only, documentation-only, and CI-only pull requests do not require one. Never run Changesets versioning or npm publication manually; the sole exception is the one-time organization-owner bootstrap documented in `docs/RELEASING.md`.
+Showcase-only, documentation-only, and CI-only pull requests do not require one. Never run Changesets versioning or npm publication manually. The completed one-time bootstrap in `docs/RELEASING.md` is historical evidence, not an active exception.
