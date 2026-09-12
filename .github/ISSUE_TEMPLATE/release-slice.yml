@@ -53,7 +53,8 @@ body:
     attributes:
       label: Release-readiness gate
       placeholder: |
-        - [ ] Every implementation issue is closed by a reviewed normal-merged PR, and every decision issue has its accepted fingerprint-bound approval record and prescribed closure record.
+        - [ ] This tracker fingerprint matches its accepted activation record.
+        - [ ] Every required issue fingerprint still matches its accepted approval; every implementation issue is closed by a reviewed normal-merged PR, and every decision issue has a verified decision-closure record.
         - [ ] Every public change has a correct Changeset.
         - [ ] The release PR contains only this coherent capability.
         - [ ] Public exports, declarations, packed files, and showcase states were inspected.
@@ -69,7 +70,7 @@ body:
     id: publication
     attributes:
       label: Post-authorization publication record
-      description: Complete only after a separate direct instruction from the active user names and authorizes the exact generated release PR, and it merges normally.
+      description: Complete only after a separate direct instruction from the active user names and authorizes the exact generated release PR and reviewed head SHA, and it merges normally with that SHA as a precondition.
       placeholder: |
         Success:
         - [ ] Record the published version, npm provenance URL, workflow run, and release commit.
@@ -86,7 +87,9 @@ body:
     attributes:
       label: Release hold
       options:
+        - label: The tracker cannot enter `status:in-progress` until an accepted approval record binds its current title, body, and milestone fingerprint.
+          required: true
         - label: The generated Changesets release PR must remain unmerged until every gate above is satisfied.
           required: true
-        - label: The agent may recommend a version and readiness, but only a separate direct active-user instruction naming the reviewed release PR may authorize its normal merge; GitHub Actions alone publishes through OIDC.
+        - label: The agent may recommend a version and readiness, but only a separate direct active-user instruction naming the reviewed release PR and exact head SHA may authorize its normal expected-SHA merge; GitHub Actions alone publishes through OIDC.
           required: true
