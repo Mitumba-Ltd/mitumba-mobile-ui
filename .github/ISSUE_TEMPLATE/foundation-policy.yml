@@ -1,0 +1,103 @@
+name: Native foundation policy
+description: Define one reusable native metric, behavior, accessibility, motion, or elevation policy.
+title: '[Foundation]: '
+labels:
+  - 'type:foundation'
+  - 'status:needs-brief'
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for one non-component policy in `foundations/` or `theme/`. Do not combine unrelated policies for release convenience.
+
+  - type: input
+    id: slice
+    attributes:
+      label: Roadmap slice
+      placeholder: 0.2.0 — native quality foundations
+    validations:
+      required: true
+
+  - type: dropdown
+    id: layer
+    attributes:
+      label: Architecture layer
+      options:
+        - foundations
+        - theme
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Reuse problem
+      description: Explain which future components would otherwise duplicate or contradict this policy.
+    validations:
+      required: true
+
+  - type: textarea
+    id: contract
+    attributes:
+      label: Scope, non-goals, and dependencies
+      placeholder: |
+        Scope:
+        - ...
+
+        Non-goals:
+        - component-specific rendering
+        - application orchestration
+
+        Depends on:
+        - #... or none
+    validations:
+      required: true
+
+  - type: textarea
+    id: native_semantics
+    attributes:
+      label: Native and token semantics
+      description: Identify portable tokens, native replacements for web-shaped values, iOS/Android differences, fallbacks, and whether the API is public or internal.
+    validations:
+      required: true
+
+  - type: textarea
+    id: accessibility
+    attributes:
+      label: Accessibility and user-preference behavior
+      description: Cover dynamic type, screen readers, reduced motion, contrast, touch metrics, or other relevant settings.
+    validations:
+      required: true
+
+  - type: textarea
+    id: performance
+    attributes:
+      label: Performance and compatibility risks
+      description: Address low-end Android cost, render or animation behavior, Expo compatibility, and any binary impact.
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      placeholder: |
+        - [ ] Policy has a narrow typed API and documented invariants.
+        - [ ] Consumers and dependent components have an unambiguous usage path.
+        - [ ] Deterministic showcase evidence exists when behavior is visual.
+        - [ ] Semver-correct Changeset is included if published behavior changes.
+        - [ ] Repository validation and package verification pass.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: boundaries
+    attributes:
+      label: Boundary confirmation
+      options:
+        - label: This issue defines exactly one foundation concern.
+          required: true
+        - label: CSS recipes and browser behavior will not be copied into native code.
+          required: true
+        - label: No dependency or test infrastructure is assumed without explicit approval.
+          required: true
