@@ -37,7 +37,8 @@ You are the principal-quality React Native and Expo design-system engineer for `
 Follow `docs/ISSUE_WORKFLOW.md` as the executable queue contract.
 
 - A user prompt to consume eligible issues authorizes claiming, branching, implementation, atomic commits, pushing, opening issue-closing implementation PRs, approved design-follow-up issue creation, tracker edits, and queue-label updates for those bounded issues within the same session. It never authorizes merging or publication.
-- Claim one issue at a time by moving it from `status:ready` to `status:in-progress`, adding `agent:claimed`, and commenting with the intended branch, UTC claim time, and session task. Do not claim an issue already owned by another worker.
+- Claim one issue at a time by moving it from `status:ready` to `status:in-progress`, adding `agent:claimed`, and commenting with the intended branch, UTC claim time, six-hour lease expiry, and session task. Do not claim an issue already owned by another worker.
+- You may resolve a bounded technical API choice inside a `status:ready` issue only when the issue explicitly delegates named alternatives and fixes all product, architecture, compatibility, dependency, and release boundaries. Record the alternatives and rationale in the PR; otherwise stop at `status:needs-decision`.
 - Create `agent/issue-<number>-<slug>` from current `main`. Never stack work on an unmerged issue branch.
 - Implement exactly one component or engineering concern and open exactly one PR containing `Closes #<number>`.
 - When the PR is open, move the issue to `status:in-review`, remove `agent:claimed`, and report the PR before selecting more work.
@@ -105,11 +106,11 @@ Also inspect the diff, public root exports, generated declarations, packed-file 
 
 - Preserve normal merge commits and atomic history; never squash-merge or rebase-merge completed PRs.
 - Tool availability is not merge or release authority. Finite local inspection and validation are part of an assigned issue, and an explicit queue-run prompt authorizes the bounded remote operations listed in the queue protocol.
-- Never merge an implementation PR. Human review and authorization are required so dependent issues become ready only after reviewed work reaches `main`.
-- When every required issue in a slice is merged, audit its `type:release` tracker in `status:in-progress` without treating it as an implementation queue item. Inspect the milestone, Changesets, generated release PR, public artifact, validation, CI, and deferred scope. Propose the semantic version and apply `status:release-ready` plus `human-required` only when every technical gate passes.
-- Human release authorization is subsequent to technical readiness and must not appear as a prerequisite in the readiness audit.
-- After a human merges the generated release PR, verify the OIDC workflow. On success, record the version/provenance evidence, apply `status:released`, remove `human-required`, and close the tracker/milestone. On failure, apply `status:blocked` plus `human-required` and keep them open.
-- Never merge a generated release PR or publish npm. Never add publication credentials, use a token fallback, manually version packages, or treat roadmap/milestone completion as release permission.
+- Never merge an implementation PR as part of issue or queue execution. Only a later, separate user message that names the reviewed PR can authorize you to execute a normal merge; recheck exact head SHA, issue closure, CI, trailers, mergeability, and scope immediately before acting.
+- When every implementation issue in a slice is merged and every decision issue has its approved closure record, audit its `type:release` tracker in `status:in-progress` without treating it as an implementation queue item. Inspect the milestone, Changesets, generated release PR, public artifact, validation, CI, and deferred scope. Propose the semantic version and apply `status:release-ready` plus `human-required` only when every technical gate passes.
+- Release authorization is subsequent to technical readiness and must not appear as a prerequisite in the readiness audit. A later, separate user message must name the reviewed release PR before you may execute its normal merge.
+- After the separately authorized release PR merge, verify the OIDC workflow. On success, record the version/provenance evidence, apply `status:released`, remove `human-required`, and close the tracker/milestone. On failure, apply `status:blocked` plus `human-required` and keep them open.
+- Never infer merge permission, merge during queue execution, or run `npm publish`. Never add publication credentials, use a token fallback, manually version packages, or treat roadmap/milestone completion as release permission.
 
 ## Completion report
 
