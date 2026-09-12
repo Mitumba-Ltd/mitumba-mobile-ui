@@ -1,0 +1,92 @@
+name: Release-slice tracker
+description: Track one coherent milestone and hold its generated release PR until readiness is verified.
+title: '[Slice]: '
+labels:
+  - 'type:release'
+  - 'status:needs-brief'
+body:
+  - type: input
+    id: milestone
+    attributes:
+      label: Milestone and planning version
+      placeholder: 0.3.0 — buyer listing tile
+    validations:
+      required: true
+
+  - type: textarea
+    id: capability
+    attributes:
+      label: Coherent user capability
+      description: State one outcome this release enables; avoid a catalog of unrelated components.
+    validations:
+      required: true
+
+  - type: textarea
+    id: required_issues
+    attributes:
+      label: Required issues and dependency order
+      placeholder: |
+        - [ ] #... — foundation or decision
+        - [ ] #... — first component
+        - [ ] #... — dependent component
+    validations:
+      required: true
+
+  - type: textarea
+    id: budget
+    attributes:
+      label: Release budget and deferred scope
+      description: Normally allow two to four tightly related public components and list everything deferred.
+    validations:
+      required: true
+
+  - type: textarea
+    id: changesets
+    attributes:
+      label: Expected version and Changesets
+      description: Record the proposed SemVer result and update this list as public-change PRs merge.
+    validations:
+      required: true
+
+  - type: textarea
+    id: readiness
+    attributes:
+      label: Release-readiness gate
+      placeholder: |
+        - [ ] All required milestone issues are closed by normal-merged PRs.
+        - [ ] Every public change has a correct Changeset.
+        - [ ] The release PR contains only this coherent capability.
+        - [ ] Public exports, declarations, packed files, and showcase states were inspected.
+        - [ ] `npm run validate` passes at the release candidate SHA.
+        - [ ] `npm run verify:package` passes at the release candidate SHA.
+        - [ ] `npx expo install --check` passes from `apps/showcase`.
+        - [ ] CI and Publish preparation checks are green.
+        - [ ] The agent posted a release-readiness recommendation.
+    validations:
+      required: true
+
+  - type: textarea
+    id: publication
+    attributes:
+      label: Post-authorization publication record
+      description: Complete only after a human separately authorizes and merges the generated release PR.
+      placeholder: |
+        Success:
+        - [ ] Record the published version, npm provenance URL, workflow run, and release commit.
+        - [ ] Apply `status:released`, close this tracker, and close the milestone.
+
+        Failure:
+        - [ ] Apply `status:blocked` and `human-required`.
+        - [ ] Keep this tracker and milestone open; diagnose without local publication or bypasses.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: hold
+    attributes:
+      label: Release hold
+      options:
+        - label: The generated Changesets release PR must remain unmerged until every gate above is satisfied.
+          required: true
+        - label: The agent may recommend a version and readiness, but only a human may authorize merge or publication.
+          required: true
