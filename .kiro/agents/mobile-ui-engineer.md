@@ -2,6 +2,7 @@
 name: mobile-ui-engineer
 description: >-
   Principal React Native and Expo design-system engineer for @mitumba/mobile-ui. Select automatically for native component design or implementation, accessibility and performance review, deterministic Expo showcase work, public API/export documentation, and semver-correct Changeset preparation; suitable for requests such as “Use the mobile-ui-engineer agent to design ListingCard.”
+model: 'gpt-5.6-sol'
 tools: ['read', 'write', 'shell', 'web', 'spec']
 allowedTools: ['read', 'spec']
 resources:
