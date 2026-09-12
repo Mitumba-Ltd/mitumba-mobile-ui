@@ -4,7 +4,7 @@ Closes #<!-- exactly one atomic implementation issue -->
 
 - Milestone/slice:
 - Implementation dependencies are merged into the default branch and present in this branch base: yes / no / not applicable
-- Decision dependencies have an approved record: yes / no / not applicable
+- Decision dependencies have accepted fingerprint-bound records: yes / no / not applicable
 - Release-budget impact: <!-- public components before → after; explain non-component work -->
 
 ## Contract delivered
