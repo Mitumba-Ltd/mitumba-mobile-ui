@@ -3,8 +3,12 @@
 Closes #<!-- exactly one atomic implementation issue -->
 
 - Milestone/slice:
+- Issue approval record and current fingerprint:
+- Active tracker activation record and current fingerprint:
+- Fingerprints revalidated immediately before PR creation at:
+- Repository WIP slot ref:
 - Implementation dependencies are merged into the default branch and present in this branch base: yes / no / not applicable
-- Decision dependencies have accepted fingerprint-bound records: yes / no / not applicable
+- Decision dependencies have verified decision-closure records: yes / no / not applicable
 - Release-budget impact: <!-- public components before → after; explain non-component work -->
 
 ## Contract delivered
@@ -54,8 +58,8 @@ Exact commands, results, and checks not run:
 ## Queue and release safety
 
 - [ ] This PR closes exactly one atomic issue
-- [ ] This branch starts from `main` rather than another unmerged issue branch
-- [ ] The repository work-in-progress limit remains satisfied
+- [ ] This issue branch and its WIP slot were atomically created from the recorded current `main` SHA
+- [ ] The session has one active issue at most and the two-slot repository WIP cap remains satisfied
 - [ ] Follow-up scope was opened as another issue instead of added silently
 - [ ] This is not a generated release PR, or its slice is explicitly `status:release-ready`
-- [ ] No merge or publication is implied by implementation completion
+- [ ] No merge or publication is implied by implementation completion; any later merge authorization must name this PR and its exact reviewed head SHA
