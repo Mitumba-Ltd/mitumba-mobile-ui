@@ -139,7 +139,7 @@ Seed one design/discovery issue for each area rather than speculative implementa
 3. disputes and two-factor-authentication presentation;
 4. VAZI experiences.
 
-A discovery issue may propose a numbered milestone and atomic component issues only after dependencies and a two-to-four-component capability are approved.
+A discovery issue may propose a numbered milestone and atomic component issues only after dependencies and a two-to-four-component capability are approved. Discovery tracker #15 is not a package release: after all four areas are promoted or explicitly deferred, it receives `status:complete` and closes without Changesets or OIDC publication.
 
 ## Dependency spine
 
@@ -177,7 +177,7 @@ This lets the issue program grow continuously without pretending that today's gu
 
 A checkpoint is reached only when:
 
-- every required issue is closed by its own reviewed, normal-merged PR;
+- every implementation issue is closed by its own reviewed, normal-merged PR, while every decision issue has its approved comment and prescribed closure record;
 - release trackers and milestones contain no hidden or contradictory scope;
 - all public changes have correct Changesets and deterministic showcase states;
 - accessibility, iOS/Android behavior, dynamic type, reduced motion, and low-end Android constraints are represented;
