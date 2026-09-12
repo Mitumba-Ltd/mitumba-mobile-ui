@@ -18,7 +18,7 @@ The roadmap sets direction. Issues contain approved executable scope. Neither on
 
 ## Queue bootstrap and source of truth
 
-The live queue is bootstrapped once by creating the documented labels, one milestone per seeded slice, the program tracker, one tracker per milestone, known atomic issues, and design-gate issues for unresolved slices. `docs/DEVELOPMENT_PROGRAM.md` records the canonical program tracker and milestone links after provisioning.
+The live queue is bootstrapped with the documented labels, one milestone per seeded slice, [program tracker #5](https://github.com/Mitumba-Ltd/mitumba-mobile-ui/issues/5), [slice trackers #6–#15](https://github.com/Mitumba-Ltd/mitumba-mobile-ui/issues?q=is%3Aissue%20label%3A%22type%3Arelease%22), known atomic issues, and design-gate issues for unresolved slices. `docs/DEVELOPMENT_PROGRAM.md` records the canonical tracker and milestone links.
 
 A fresh session must query GitHub rather than infer state from this document. If a documented label, milestone, or tracker is missing, duplicated, or contradictory, stop and request repair instead of creating a parallel queue. New future slices enter through an approved design issue and release tracker, not ad hoc implementation issues.
 
