@@ -10,15 +10,16 @@ The one-time package reservation `0.0.0` remains deprecated under the `bootstrap
 
 ## Slice-based release flow
 
-1. Assign each public-change issue to one active release milestone and slice tracker.
-2. Add a semver-correct Changeset to every implementation PR that changes public behavior, API, dependencies, or compatibility.
-3. Merge each approved implementation PR normally into `main` after CI passes.
-4. The `Publish` workflow opens or updates `chore: release packages` from the accumulated Changesets.
-5. Keep that generated release PR open while required issues remain in the milestone.
-6. The mobile UI engineer audits the completed slice and posts a proposed version plus release-readiness evidence on the tracker.
-7. Apply `status:release-ready` only when every tracker gate passes.
-8. A later, separate direct instruction from the active user names and authorizes the exact reviewed release PR for normal merge.
-9. The next `Publish` run builds, verifies, and publishes through OIDC with npm provenance.
+1. Activate the earliest dependency-eligible release tracker only after an accepted approval record binds its current title/body/milestone fingerprint.
+2. Assign each public-change issue to that milestone and tracker, and require its own accepted contract fingerprint.
+3. Add a semver-correct Changeset to every implementation PR that changes public behavior, API, dependencies, or compatibility.
+4. Merge each reviewed implementation PR normally only after CI, continuous issue/tracker fingerprint checks, and a separate direct active-user authorization naming its exact head SHA.
+5. The `Publish` workflow opens or updates `chore: release packages` from the accumulated Changesets.
+6. Keep that generated release PR open while required issues remain in the milestone.
+7. The mobile UI engineer audits the completed slice and posts a proposed version plus release-readiness evidence on the tracker.
+8. Apply `status:release-ready` only when every tracker gate passes.
+9. A later, separate direct instruction from the active user names and authorizes the exact reviewed release PR and head SHA for a normal expected-SHA merge.
+10. The next `Publish` run builds, verifies, and publishes through OIDC with npm provenance.
 
 Changesets does not wait for GitHub milestones. A generated release PR appearing after the first qualifying implementation merge is expected and is not evidence that the slice is ready.
 
@@ -28,7 +29,7 @@ Do not edit package versions or changelogs manually. Do not run Changesets versi
 
 Before recommending a release, verify:
 
-- every implementation issue in the active slice tracker is closed by its own reviewed normal-merged PR, and every decision issue has its accepted fingerprint-bound approval record and prescribed closure record;
+- the active tracker fingerprint still matches its accepted activation record, every required issue fingerprint still matches its accepted approval, every implementation issue is closed by its own reviewed normal-merged PR, and every decision issue has a verified decision-closure record;
 - the result is still one coherent capability within the approved release budget;
 - every public change has the correct Changeset and the generated semantic version is expected;
 - public exports, generated declarations, consumer documentation, and deterministic showcase states are complete;
@@ -39,7 +40,7 @@ Before recommending a release, verify:
 - deferred or follow-up work remains visible in later issues;
 - no dependency, test, compatibility, credential, or scope approval is unresolved.
 
-The agent decides whether the evidence supports a release recommendation and proposes the semantic version. It applies `status:release-ready` plus `human-required` only after the technical audit. Direct active-user merge authorization is a subsequent gate and is not part of technical readiness. Queue execution never includes merge permission; only a later, separate user message naming the reviewed release PR may authorize an agent to execute its normal merge. GitHub Actions—not the agent—performs publication.
+The agent decides whether the evidence supports a release recommendation and proposes the semantic version. It applies `status:release-ready` plus `human-required` only after the technical audit. Direct active-user merge authorization is a subsequent gate and is not part of technical readiness. Queue execution never includes merge permission; only a later, separate user message naming the reviewed release PR and exact head SHA may authorize an agent to execute its normal merge. The agent must revalidate tracker/issue fingerprints and send that SHA as the merge precondition; any head change requires fresh authorization. GitHub Actions—not the agent—performs publication.
 
 ## Post-publication transition
 
