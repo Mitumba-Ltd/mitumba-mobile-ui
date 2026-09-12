@@ -1,0 +1,137 @@
+name: Native component
+description: Propose one bounded React Native component for an approved release slice.
+title: '[Component]: '
+labels:
+  - 'type:component'
+  - 'status:needs-brief'
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for exactly one public component. Complete the contract before adding `status:ready` and `agent:eligible`.
+
+  - type: input
+    id: slice
+    attributes:
+      label: Roadmap slice
+      description: Target milestone or approved capability; versions are planning targets until released.
+      placeholder: 0.3.0 — buyer listing tile
+    validations:
+      required: true
+
+  - type: dropdown
+    id: layer
+    attributes:
+      label: Architecture layer
+      options:
+        - primitives
+        - components
+        - patterns
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: User problem and usage context
+      description: Identify the buyer, seller, consumer developer, and native context this component serves.
+      placeholder: Explain the problem, where the component appears, and why package-level reuse is justified.
+    validations:
+      required: true
+
+  - type: textarea
+    id: contract
+    attributes:
+      label: Scope, non-goals, and dependencies
+      description: Keep application orchestration outside the package and name every blocking issue.
+      placeholder: |
+        Scope:
+        - ...
+
+        Non-goals:
+        - navigation, fetching, stores, analytics, permissions, uploads, payments, or business decisions
+
+        Depends on:
+        - #...
+    validations:
+      required: true
+
+  - type: textarea
+    id: states
+    attributes:
+      label: State matrix
+      description: Include only relevant states, but explicitly mark non-applicable rows.
+      placeholder: |
+        | Dimension | Required states | Expected behavior |
+        | --- | --- | --- |
+        | Content | default, long, missing | ... |
+        | Interaction | default, pressed, disabled | ... |
+        | Async | loading, success, error, retry | ... |
+        | Connectivity | offline | ... |
+        | Accessibility | screen reader, large type, reduced motion | ... |
+        | Platform | iOS, Android | ... |
+    validations:
+      required: true
+
+  - type: textarea
+    id: api
+    attributes:
+      label: Proposed semantic API
+      description: Define controlled values, callbacks, defaults, and intentional escape hatches without browser event contracts.
+      render: ts
+    validations:
+      required: true
+
+  - type: textarea
+    id: native_design
+    attributes:
+      label: Native design, tokens, and platform behavior
+      description: Describe hierarchy, token mapping, touch/gesture behavior, dynamic layout, motion, elevation, safe areas, keyboard, and Android back behavior where relevant.
+    validations:
+      required: true
+
+  - type: textarea
+    id: accessibility
+    attributes:
+      label: Accessibility contract
+      description: Cover accessible name, role, state, value, actions, feedback, 44×44 targets, focus order, dynamic type, contrast, and reduced motion.
+    validations:
+      required: true
+
+  - type: textarea
+    id: performance
+    attributes:
+      label: Performance contract
+      description: Address render stability, list suitability, image and animation cost, and the low-end Android budget.
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria and deterministic showcase
+      description: Include implementation, types/JSDoc, exports, documentation, showcase states, Changeset, and applicable validation evidence.
+      placeholder: |
+        - [ ] Public types and every public prop are documented.
+        - [ ] Implementation, local export, and root export are complete.
+        - [ ] Deterministic showcase covers every significant state above.
+        - [ ] Semver-correct Changeset is included.
+        - [ ] `npm run validate` passes.
+        - [ ] `npm run verify:package` passes.
+        - [ ] `npx expo install --check` passes from `apps/showcase`.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: boundaries
+    attributes:
+      label: Boundary confirmation
+      options:
+        - label: This issue describes one component and one implementation PR.
+          required: true
+        - label: The API is presentational and callback-driven; application orchestration remains outside the package.
+          required: true
+        - label: No new dependency or test infrastructure is assumed without explicit approval.
+          required: true
+        - label: A roadmap entry or milestone does not by itself authorize implementation, merge, or release.
+          required: true
