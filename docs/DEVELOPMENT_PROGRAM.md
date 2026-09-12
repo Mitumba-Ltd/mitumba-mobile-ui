@@ -58,7 +58,7 @@ Expected after orders/trust, seller identity/store, and seller authoring present
 
 Messaging, confirmations and modal patterns, disputes and two-factor-authentication presentation, and VAZI experiences follow the core checkpoints. Each starts with discovery and becomes a numbered release only after its scope forms one coherent capability.
 
-Version numbers are planning targets. The mobile UI engineer proposes the actual semantic version at release readiness from the accumulated public changes; a human authorizes the release.
+Version numbers are planning targets. The mobile UI engineer proposes the actual semantic version at release readiness from the accumulated public changes; only a later, separate direct active-user instruction naming the reviewed release PR may authorize its normal merge, and GitHub Actions owns OIDC publication.
 
 ## Seeded release slices
 
@@ -165,11 +165,11 @@ For intentionally undefined slices, the design issue must:
 1. inspect real buyer/seller flow requirements and approved earlier APIs;
 2. propose one coherent outcome and normally two to four public components;
 3. document non-goals, state and accessibility risks, platform behavior, dependency order, alternatives, and deferrals;
-4. move to `status:needs-decision` and obtain a human approval comment naming the selected contract;
+4. move to `status:needs-decision` and obtain an accepted active-user or currently verified maintainer/admin approval record that names the selected contract and binds it to the current issue-contract fingerprint;
 5. create one detailed `status:needs-brief` issue per approved component or foundation concern;
 6. update the slice tracker and milestone;
-7. leave every new issue non-eligible until its individual contract is approved;
-8. close the design issue from the decision record without an implementation PR.
+7. leave every new issue non-eligible until its individual contract has an accepted fingerprint-bound approval record;
+8. close the design issue from the accepted decision record without an implementation PR.
 
 This lets the issue program grow continuously without pretending that today's guesses are approved future APIs.
 
@@ -177,10 +177,10 @@ This lets the issue program grow continuously without pretending that today's gu
 
 A checkpoint is reached only when:
 
-- every implementation issue is closed by its own reviewed, normal-merged PR, while every decision issue has its approved comment and prescribed closure record;
+- every implementation issue is closed by its own reviewed, normal-merged PR, while every decision issue has its accepted fingerprint-bound approval record and prescribed closure record;
 - release trackers and milestones contain no hidden or contradictory scope;
 - all public changes have correct Changesets and deterministic showcase states;
 - accessibility, iOS/Android behavior, dynamic type, reduced motion, and low-end Android constraints are represented;
 - packed-package verification proves the npm artifact works in an isolated Expo consumer;
 - deferred responsibilities remain visible as issues;
-- the release-readiness recommendation and human authorization are recorded separately.
+- the release-readiness recommendation, separate direct active-user merge authorization, and GitHub Actions OIDC publication record remain distinct.
