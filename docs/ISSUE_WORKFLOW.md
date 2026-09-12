@@ -28,7 +28,8 @@ A fresh session must query GitHub rather than infer state from this document. If
 - `type:foundation`: one native policy or token-adaptation concern.
 - `type:decision`: a bounded design choice or slice definition; it creates implementation issues after approval instead of hiding implementation in the decision.
 - `type:bug`: one reproducible defect or regression.
-- `type:release`: a non-implementation release-slice tracker.
+- `type:release`: a non-implementation release-slice tracker that ends in verified OIDC publication.
+- `type:discovery`: a non-publication umbrella that ends when its child discoveries are promoted or explicitly deferred.
 - `type:program`: the non-implementation app-enablement tracker.
 
 An issue is detailed enough only when its problem, non-goals, dependencies, state matrix, semantic API or decision deliverable, native design, accessibility behavior, platform differences, performance risks, acceptance criteria, showcase evidence, and release impact are explicit where relevant.
@@ -44,7 +45,8 @@ An issue is detailed enough only when its problem, non-goals, dependencies, stat
 - `status:in-review`: its implementation pull request is open.
 - `status:blocked`: a dependency or external condition prevents progress.
 - `status:release-ready`: the slice passed the technical release-readiness audit and awaits human authorization.
-- `status:released`: publication succeeded and the slice tracker/milestone can be retired.
+- `status:released`: OIDC publication succeeded and the release tracker/milestone can be retired.
+- `status:complete`: a non-publication tracker satisfied its closure contract and can be retired.
 
 Exactly one contract-state label should be present.
 
@@ -74,6 +76,18 @@ Before marking an issue `status:ready`:
 
 Later milestones may contain `status:needs-brief` design issues, but their speculative component issues must not be marked agent-eligible.
 
+## Delegated technical choices
+
+A `status:ready` implementation issue may explicitly delegate a bounded technical API choice to the principal mobile UI engineer without a separate human decision only when:
+
+- the user outcome, scope, non-goals, architecture layer, state/accessibility contract, and release budget are fixed;
+- the issue names the alternatives and explicitly authorizes the agent to select the narrowest option;
+- the choice introduces no dependency, native module, test infrastructure, compatibility break, application responsibility, or roadmap expansion;
+- the agent records alternatives, rationale, API impact, and deferrals in the implementation PR before code review;
+- any option that violates those limits moves the issue to `status:needs-decision` plus `human-required` instead of being selected.
+
+This is engineering delegation, not permission to invent product behavior. Without the explicit delegation language, a materially unsettled public or shared API requires the design-decision lifecycle.
+
 ## Design-decision lifecycle
 
 Design issues feed the queue without pretending that a decision is an implementation PR:
@@ -98,7 +112,7 @@ Within that session, the agent must:
 
 1. query open issues and select the oldest or explicitly highest-priority issue carrying both `status:ready` and `agent:eligible` in the earliest active milestone;
 2. confirm every implementation dependency's linked PR is merged into the default branch and present in the new branch base, every decision dependency has an approved record, and no `human-required` condition applies;
-3. claim the issue by replacing `status:ready` with `status:in-progress` and adding `agent:claimed`;
+3. claim the issue by replacing `status:ready` with `status:in-progress`, adding `agent:claimed`, and commenting with the intended branch, UTC claim time, six-hour lease expiry, and session task;
 4. create a fresh branch from current `main` named `agent/issue-<number>-<slug>`;
 5. implement only the issue contract with atomic, trailer-compliant commits;
 6. add deterministic showcase states, documentation, exports, and a semver-correct Changeset when required;
@@ -113,9 +127,10 @@ If a session ends, the next dedicated session resumes by querying labels, milest
 
 A fresh session must not silently steal `agent:claimed` work.
 
-- Every claim comment records the issue, intended branch, UTC claim time, and session task.
-- If the recorded branch or an open PR exists, stop and ask whether to resume that exact work; never create a second branch for the issue.
-- If no remote branch, PR, or timeline activity exists after the claim, move the issue to `status:blocked` plus `human-required` and request explicit recovery approval.
+- Every claim comment records the issue, intended branch, UTC claim time, session task, and a six-hour lease expiry. The owning session may renew the lease with a timestamped heartbeat before expiry when work is still active.
+- While the latest lease is unexpired, another session must not mutate, relabel, resume, or replace the claim; it reports the issue as in flight and selects other eligible work.
+- After lease expiry, inspect the issue timeline, remote branch, commits, Actions, and PRs. If the recorded branch or an open PR exists, stop and ask whether to resume that exact work; never create a second branch for the issue.
+- If the lease expired and no remote branch, PR, commit, workflow, or post-claim timeline activity exists, move the issue to `status:blocked` plus `human-required` and request explicit recovery approval.
 - After approval, clear the stale claim and return the issue to `status:ready`, or resume the existing branch when its diff and base are safe.
 - If an implementation PR closes without merge, move the issue from `status:in-review` to `status:blocked` plus `human-required`. Reopen the same PR whenever possible.
 - A replacement PR requires explicit human approval, must reference the closed PR and same issue, and must leave only one active implementation PR. It does not authorize broader scope.
@@ -157,7 +172,17 @@ Every implementation PR must:
 - preserve extremely atomic commits with the required Stanley co-author trailer;
 - remain unmerged until human review and authorization.
 
-Use normal merge commits. Never squash or rebase-merge away the atomic history.
+Use normal merge commits. Never squash or rebase-merge away the atomic history. Queue authorization never includes merging. A later, separate user message may authorize the agent to execute a normal merge only when it names the reviewed PR; the agent must recheck its exact head SHA, issue contract, CI, commit trailers, mergeability, and WIP/release state immediately before acting. No standing or inferred merge permission exists.
+
+## Discovery-tracker lifecycle
+
+A `type:discovery` umbrella never enters Changesets or OIDC publication:
+
+1. `status:needs-brief`: discovery outcomes and evidence are incomplete;
+2. `status:in-progress`: its discovery issues are being researched and decided;
+3. `status:complete`: every child is promoted into an approved numbered tracker/milestone or explicitly deferred with rationale; close the discovery tracker and milestone.
+
+If a discovery fails or lacks required evidence, use `status:blocked` plus `human-required`. Never apply `status:release-ready` or `status:released` to a discovery umbrella.
 
 ## Release-tracker lifecycle
 
@@ -177,14 +202,14 @@ Changesets opens or updates `chore: release packages` after qualifying changes r
 
 The mobile UI engineer owns the readiness **recommendation** and proposed semantic version. It marks the slice `status:release-ready` only after verifying:
 
-1. every required tracker issue is closed and no release blocker remains;
+1. every implementation issue is closed by a reviewed normal-merged PR on the default branch, every decision issue has its approved comment and prescribed closure record, and no release blocker remains;
 2. the merged work still forms one coherent capability within budget;
 3. every public change has the correct Changeset and the generated version is expected;
 4. public exports, declarations, packed files, documentation, and deterministic showcase states are complete;
 5. repository validation, isolated package verification, Expo compatibility, CI, and release preparation are green at the candidate SHA;
 6. deferred work is recorded in later issues rather than hidden in the release.
 
-The agent then comments on the slice tracker with evidence, the proposed version, and residual risks; it applies `status:release-ready` plus `human-required`. Technical readiness deliberately excludes merge authorization. A human retains the sole authority to merge the generated release PR. GitHub Actions publishes through OIDC only after that merge; the agent never runs `npm publish`.
+The agent then comments on the slice tracker with evidence, the proposed version, and residual risks; it applies `status:release-ready` plus `human-required`. Technical readiness deliberately excludes merge authorization. A human retains the sole authority to authorize merging the generated release PR. If a later, separate user message names that reviewed release PR, an agent may execute its normal merge only after rerunning the pre-merge checks. GitHub Actions publishes through OIDC after the merge; the agent never runs `npm publish`.
 
 ## Post-publication transition
 
