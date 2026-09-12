@@ -26,7 +26,8 @@ This repository publishes `@mitumba/mobile-ui`, Mitumba's native design and inte
 - Run `npm run validate` and `npm run verify:package` before requesting review.
 - Add a semver-correct Changeset for public behavior and update the slice tracker with release impact.
 - When a slice satisfies its tracker, produce a release-readiness recommendation with evidence; do not interpret that recommendation as merge permission.
-- Never merge an implementation or generated release pull request without explicit human authorization.
+- A queue-run instruction never includes merge permission. An agent may execute a normal implementation or release PR merge only after a separate, explicit user message names that reviewed PR; recheck its exact head, CI, scope, and readiness immediately before merging.
+- Never infer standing merge authority from issue assignment, `status:release-ready`, earlier approvals, tool access, or permission to consume the queue.
 - Never run `npm publish` except for the completed one-time organization-owner bootstrap described in `docs/RELEASING.md`; never add an npm token or edit generated release versions manually.
 - Do not weaken checks to make a change pass.
 
