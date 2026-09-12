@@ -6,7 +6,7 @@
 
 The absence of CSS is not a reduced design target. Native quality comes from platform primitives, touch and gesture behavior, dynamic type, safe-area and keyboard handling, screen-reader semantics, motion preferences, and predictable performance on real iOS and Android devices.
 
-This document is the working sequence for releases after `0.1.0`. It is a planning contract, not permission to publish. Every slice still requires an approved brief and explicit approval before a release PR is merged or npm is published.
+This document is the working sequence for releases after `0.1.0`. It is a planning contract, not permission to publish. Every slice still requires an accepted fingerprint-bound brief approval; merging a reviewed release PR requires a later, separate direct instruction from the active user that names it, and npm publication remains GitHub Actions OIDC-only.
 
 ## Architecture contract
 
@@ -82,7 +82,7 @@ Do not start a broad catalog while API or state decisions remain unresolved. A b
 - Public behavior changes require a Changeset; internal documentation-only planning does not.
 - Test infrastructure or new tests are added only when the task explicitly approves that work.
 - The engineer may prepare implementation PRs and Changesets, but must never merge during queue execution, publish npm, or independently expand release scope. A later separate user message may authorize a normal merge of the specifically named reviewed PR.
-- The engineer owns the evidence-based release-readiness recommendation and proposed semantic version; a human owns release authorization.
+- The engineer owns the evidence-based release-readiness recommendation and proposed semantic version; a later direct active-user instruction naming the reviewed release PR owns merge authorization, while GitHub Actions owns OIDC publication.
 - Changesets may open a release PR after the first public-change PR in a slice. Keep it unmerged until the milestone tracker is `status:release-ready`.
 - Human- or agent-authored commits must be extremely atomic and include:
 
