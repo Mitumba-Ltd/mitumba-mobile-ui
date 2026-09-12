@@ -61,6 +61,17 @@ Work proceeds in this order for each component or tightly bounded concern:
 
 Do not start a broad catalog while API or state decisions remain unresolved. A brief can revise the planned component name or scope when native interaction research justifies it.
 
+## Issue execution
+
+`docs/DEVELOPMENT_PROGRAM.md` defines app-enablement checkpoints and the dependency spine. `docs/ISSUE_WORKFLOW.md` defines the executable queue, issue states, work-in-progress limit, PR-closing contract, and release-readiness decision.
+
+- Every known component or foundation concern receives one detailed issue and one implementation PR.
+- Intentionally undefined slices receive a design issue first; approved design work creates the later atomic implementation issues.
+- Only issues carrying both `status:ready` and `agent:eligible` may enter the dedicated-agent queue.
+- Each implementation PR contains `Closes #<issue>` and must not absorb follow-up scope.
+- GitHub milestones and slice trackers are the live execution state; this roadmap remains the sequencing and quality contract.
+- A dedicated Kiro Web session may consume multiple independent eligible issues within the WIP limit, but the custom agent is not a persistent scheduler and cannot wake itself after the session ends.
+
 ## Release operating model
 
 - One component or engineering concern per implementation PR.
@@ -71,6 +82,8 @@ Do not start a broad catalog while API or state decisions remain unresolved. A b
 - Public behavior changes require a Changeset; internal documentation-only planning does not.
 - Test infrastructure or new tests are added only when the task explicitly approves that work.
 - The engineer may prepare implementation PRs and Changesets, but must never merge a release PR, publish npm, or independently expand a release scope.
+- The engineer owns the evidence-based release-readiness recommendation and proposed semantic version; a human owns release authorization.
+- Changesets may open a release PR after the first public-change PR in a slice. Keep it unmerged until the milestone tracker is `status:release-ready`.
 - Human- or agent-authored commits must be extremely atomic and include:
 
   ```text
