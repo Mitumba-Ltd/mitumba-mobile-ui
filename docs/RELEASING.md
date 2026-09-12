@@ -2,33 +2,54 @@
 
 Releases use Changesets and npm trusted publishing through GitHub Actions OIDC. No long-lived npm publication token belongs in GitHub secrets.
 
-## Normal release flow
+## Current published baseline
 
-1. Add a Changeset to every pull request that changes public behavior or API.
-2. Merge the pull request to `main` after CI passes.
-3. The `Publish` workflow opens or updates `chore: release packages`.
-4. Review and merge that generated release pull request.
-5. The next `Publish` run builds, verifies, and publishes the new version with npm provenance.
+`@mitumba/mobile-ui@0.1.0` is the supported `latest` release. It was published from `main` through `.github/workflows/publish.yml` with npm provenance on September 11, 2026.
 
-Do not edit package versions or changelogs manually. Do not run `npm publish` locally after trusted publishing is established.
+The one-time package reservation `0.0.0` remains deprecated under the `bootstrap` tag. The bootstrap is complete and must never be repeated.
 
-## One-time package bootstrap
+## Slice-based release flow
 
-The one-time bootstrap was completed on September 11, 2026. `@mitumba/mobile-ui@0.0.0` now exists publicly under the `bootstrap` tag and is deprecated as a reservation artifact. **Do not run another bootstrap publication.**
+1. Assign each public-change issue to one active release milestone and slice tracker.
+2. Add a semver-correct Changeset to every implementation PR that changes public behavior, API, dependencies, or compatibility.
+3. Merge each approved implementation PR normally into `main` after CI passes.
+4. The `Publish` workflow opens or updates `chore: release packages` from the accumulated Changesets.
+5. Keep that generated release PR open while required issues remain in the milestone.
+6. The mobile UI engineer audits the completed slice and posts a proposed version plus release-readiness evidence on the tracker.
+7. Apply `status:release-ready` only when every tracker gate passes.
+8. A human explicitly reviews and authorizes the generated release PR merge.
+9. The next `Publish` run builds, verifies, and publishes through OIDC with npm provenance.
 
-npm requires a package to exist before a trusted publisher can be attached. The package remains initialized at `0.0.0`, while `.changeset/initial-mobile-ui.md` queues the first supported `0.1.0` release.
+Changesets does not wait for GitHub milestones. A generated release PR appearing after the first qualifying implementation merge is expected and is not evidence that the slice is ready.
 
-The repository and package use the MIT License. The release gate confirms that `release-license.json` contains `MIT`, both `LICENSE` files are identical and non-empty, `packages/ui/package.json` declares `"license": "MIT"`, and the packed artifact includes the package license.
+Do not edit package versions or changelogs manually. Do not run Changesets versioning or `npm publish` locally.
 
-For audit history, the bootstrap operator used npm 12, ran every validation gate, authenticated with an ephemeral npm credential, and published only the verified tarball with public access under the `bootstrap` tag.
+## Release-readiness gate
 
-The account used for package administration must have 2FA enabled and permission in the `@mitumba` organization. npm assigned both `bootstrap` and `latest` to its first-ever version despite the explicit bootstrap tag, then rejected deleting that sole `latest` tag. `0.0.0` is therefore deprecated with a bootstrap-only warning; the supported `0.1.0` release will replace `latest`.
+Before recommending a release, verify:
 
-## Trusted publisher status
+- every required issue in the active slice tracker is closed by its own reviewed PR;
+- the result is still one coherent capability within the approved release budget;
+- every public change has the correct Changeset and the generated semantic version is expected;
+- public exports, generated declarations, consumer documentation, and deterministic showcase states are complete;
+- `npm run validate` succeeds at the candidate SHA;
+- `npm run verify:package` succeeds and the packed artifact contains only approved files;
+- `npx expo install --check` succeeds from `apps/showcase`;
+- CI and release-preparation workflows are green;
+- deferred or follow-up work remains visible in later issues;
+- no dependency, test, compatibility, credential, or scope approval is unresolved.
 
-An npm organization administrator confirmed on September 11, 2026 that the GitHub Actions OIDC connection is configured for this package. The npm trust-list endpoint requires an authenticated account session, so the definitive end-to-end check remains the first `0.1.0` workflow publication; do not add a token fallback if that check fails.
+The agent decides whether the evidence supports a release recommendation and proposes the semantic version. It applies `status:release-ready` plus `human-required` only after the technical audit. Human authorization is a subsequent gate and is not part of technical readiness. Only a human can authorize merging the generated release PR. GitHub Actions—not the agent—performs publication.
 
-The configured identity is:
+## Post-publication transition
+
+- On success, record the actual npm version, provenance URL, workflow run, and release commit on the slice tracker. Apply `status:released`, remove `human-required`, and close the tracker and milestone.
+- On failure, apply `status:blocked` plus `human-required` and keep the tracker and milestone open. Diagnose and repair through a bounded issue PR; do not publish locally or bypass OIDC.
+- Do not activate a dependent milestone until the preceding release is either verifiably published or the dependency is explicitly redesigned and approved.
+
+## Trusted publisher identity
+
+The configured npm trusted publisher is:
 
 ```text
 Organization or user: Mitumba-Ltd
@@ -38,38 +59,18 @@ Environment:          leave blank
 Allowed action:       npm publish
 ```
 
-The workflow filename is only `publish.yml`, not `.github/workflows/publish.yml`. Values are case-sensitive.
+The workflow filename is only `publish.yml`, not `.github/workflows/publish.yml`. Values are case-sensitive. The npm package must retain two-factor-authentication-required, token-disallowed publication access.
 
-After saving the trusted publisher, open **Publishing access**, choose **Require two-factor authentication and disallow tokens**, and remove any obsolete automation token. OIDC publication continues to work because it uses short-lived workflow identity rather than an npm token.
-
-The equivalent authenticated CLI command is available in npm 11.15 or newer after the package exists:
-
-```bash
-npm trust github @mitumba/mobile-ui \
-  --repo Mitumba-Ltd/mitumba-mobile-ui \
-  --file publish.yml \
-  --allow-publish
-```
-
-The website flow is preferred for the first setup because it makes the final access policy easy to review.
-
-## Publish `0.1.0`
-
-Once the trusted publisher is configured:
-
-1. Review the generated `chore: release packages` pull request.
-2. Confirm it changes `@mitumba/mobile-ui` from `0.0.0` to `0.1.0` and consumes the initial Changeset.
-3. Merge it normally.
-4. Watch the `Publish` workflow complete.
-5. Confirm npm displays provenance and the `latest` tag points to `0.1.0`.
+The repository and package use the MIT License. The release gate confirms that `release-license.json` contains `MIT`, both `LICENSE` files are identical and non-empty, `packages/ui/package.json` declares `"license": "MIT"`, and the packed artifact includes the package license.
 
 ## Failure safety
 
-- Never add `NPM_TOKEN` as a convenience fallback.
-- Do not merge a release pull request before the trusted publisher exists.
-- Do not publish from a fork; npm validates the repository identity.
+- Never add `NPM_TOKEN` as a fallback.
+- Never publish from a fork; npm validates repository identity.
+- Never bypass validation, artifact verification, provenance, or the issue/milestone hold.
 - If authentication fails, check the exact repository and workflow filename, `id-token: write`, GitHub-hosted runner, and package `repository.url`.
-- If package verification fails, fix the package or showcase and create a new reviewed commit; do not bypass the gate.
+- If package verification fails, fix the package or showcase in a new reviewed issue PR; do not edit the generated release commit.
+- If a release PR contains unrelated capability slices, do not merge it. Correct the milestone plan and defer or separate scope first.
 
 ## Official references
 
