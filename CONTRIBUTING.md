@@ -11,7 +11,7 @@ Read, in order:
 5. `docs/RELEASING.md`
 6. The approved issue being implemented
 
-Automated agents must also comply with `AGENTS.md`. An implementation issue must carry `status:ready` and `agent:eligible`, have every implementation dependency merged into the default branch and every decision dependency approved, and be explicitly assigned in the active session before work begins.
+Automated agents must also comply with `AGENTS.md`. An implementation issue must carry `status:ready` and `agent:eligible`, match an accepted approval record for its current title/body/milestone fingerprint, have every implementation dependency merged into the default branch and every decision dependency backed by its own accepted fingerprint-bound record, and be explicitly assigned in the active session before work begins.
 
 ## Workflow
 
