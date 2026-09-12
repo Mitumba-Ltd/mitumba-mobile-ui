@@ -23,7 +23,8 @@ Automated agents must also comply with `AGENTS.md`. An implementation issue must
 - Use Conventional Commits with a package or component scope.
 - Preserve atomic commits and merge pull requests with normal merge commits.
 - Never push directly to `main`.
-- Never merge a generated release pull request until its slice tracker is `status:release-ready` and a human explicitly authorizes the merge.
+- Queue consumption never includes merge permission. An agent may execute a normal merge only after a separate explicit user message names the reviewed PR and all current checks are reverified.
+- Never merge a generated release pull request until its slice tracker is `status:release-ready` and that separate explicit authorization is given.
 
 Examples:
 
