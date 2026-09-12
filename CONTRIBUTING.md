@@ -11,20 +11,21 @@ Read, in order:
 5. `docs/RELEASING.md`
 6. The approved issue being implemented
 
-Automated agents must also comply with `AGENTS.md`. An implementation issue must carry `status:ready` and `agent:eligible`, match an accepted approval record for its current title/body/milestone fingerprint, have every implementation dependency merged into the default branch and every decision dependency backed by its own accepted fingerprint-bound record, and be explicitly assigned in the active session before work begins.
+Automated agents must also comply with `AGENTS.md`. An implementation issue must carry `status:ready` and `agent:eligible`, match an accepted approval record for its current title/body/milestone fingerprint, belong to an active tracker with a matching activation fingerprint, have every implementation dependency merged into the default branch and every decision dependency backed by a verified decision-closure record, and be explicitly assigned in the active session before work begins.
 
 ## Workflow
 
-- Branch from current `main` using `agent/issue-<number>-<slug>` for agent work.
-- Keep one issue, component, or engineering concern per branch and implementation pull request.
+- Atomically reserve a repository WIP-slot ref and create `agent/issue-<number>-<slug>` from the recorded current `main` SHA through the GitHub reference API before fetching it locally.
+- Keep one issue, component, or engineering concern per issue branch and implementation pull request; retain its slot through review.
 - Include `Closes #<number>` in every implementation pull request; do not use one PR to close a release tracker or unrelated issues.
 - Do not stack a new issue branch on an unmerged implementation branch.
 - Follow the repository work-in-progress limit in `docs/ISSUE_WORKFLOW.md`.
 - Use Conventional Commits with a package or component scope.
 - Preserve atomic commits and merge pull requests with normal merge commits.
 - Never push directly to `main`.
-- Queue consumption never includes merge permission. An agent may execute a normal merge only after a separate explicit user message names the reviewed PR and all current checks are reverified.
-- Never merge a generated release pull request until its slice tracker is `status:release-ready` and that separate explicit authorization is given.
+- Revalidate the issue and active-tracker fingerprints immediately before opening the implementation PR.
+- Queue consumption never includes merge permission. An agent may execute a normal merge only after a separate direct user message names the reviewed PR and exact head SHA; revalidate contracts and send that SHA as the merge precondition.
+- Never merge a generated release pull request until its slice tracker is `status:release-ready` and that separate exact-PR/exact-SHA authorization is given.
 
 Examples:
 
