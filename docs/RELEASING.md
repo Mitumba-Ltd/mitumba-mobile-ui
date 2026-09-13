@@ -10,7 +10,7 @@ The one-time package reservation `0.0.0` remains deprecated under the `bootstrap
 
 ## Slice-based release flow
 
-1. Activate the earliest dependency-eligible release tracker only after an accepted approval record binds its current title/body/milestone fingerprint.
+1. Activate the earliest dependency-eligible release tracker only after an accepted approval record binds its current title/body/milestone fingerprint and canonical body-plus-receipt checklist hash.
 2. Assign each public-change issue to that milestone and tracker, and require its own accepted contract fingerprint.
 3. Add a semver-correct Changeset to every implementation PR that changes public behavior, API, dependencies, or compatibility.
 4. Merge each reviewed implementation PR normally only after CI, continuous issue/tracker fingerprint checks, and a separate direct active-user authorization naming its exact head SHA.
@@ -29,7 +29,7 @@ Do not edit package versions or changelogs manually. Do not run Changesets versi
 
 Before recommending a release, verify:
 
-- the active tracker fingerprint still matches its accepted activation record, every required issue fingerprint still matches its accepted approval, every implementation issue is closed by its own reviewed normal-merged PR, and every decision issue has a verified decision-closure record;
+- the active tracker fingerprint and canonical checklist hash still match its accepted activation record, every required issue in the tracker body's seed rows plus receipt-backed checklist entries has a fingerprint that still matches its accepted approval, every implementation issue is closed by its own reviewed normal-merged PR, and every decision issue has a verified decision-closure record;
 - the result is still one coherent capability within the approved release budget;
 - every public change has the correct Changeset and the generated semantic version is expected;
 - public exports, generated declarations, consumer documentation, and deterministic showcase states are complete;
@@ -40,7 +40,7 @@ Before recommending a release, verify:
 - deferred or follow-up work remains visible in later issues;
 - no dependency, test, compatibility, credential, or scope approval is unresolved.
 
-The agent decides whether the evidence supports a release recommendation and proposes the semantic version. It applies `status:release-ready` plus `human-required` only after the technical audit. Direct active-user merge authorization is a subsequent gate and is not part of technical readiness. Queue execution never includes merge permission; only a later, separate user message naming the reviewed release PR and exact head SHA may authorize an agent to execute its normal merge. The agent must revalidate tracker/issue fingerprints and send that SHA as the merge precondition; any head change requires fresh authorization. GitHub Actions—not the agent—performs publication.
+The agent decides whether the evidence supports a release recommendation and proposes the semantic version. It applies `status:release-ready` plus `human-required` only after the technical audit. Direct active-user merge authorization is a subsequent gate and is not part of technical readiness. Queue execution never includes merge permission; only a later, separate user message naming the reviewed release PR and exact head SHA may authorize an agent to execute its normal merge. The agent must revalidate tracker/issue fingerprints and the root's canonical checklist hash and send that SHA as the merge precondition; any head change requires fresh authorization. GitHub Actions—not the agent—performs publication.
 
 ## Post-publication transition
 
