@@ -44,7 +44,7 @@ body:
     id: changesets
     attributes:
       label: Expected version and Changesets
-      description: Record the proposed SemVer result and update this list as public-change PRs merge.
+      description: Record the proposed SemVer result in the seed contract; append release-impact evidence as comments when public-change PRs merge rather than replacing the tracker body.
     validations:
       required: true
 
@@ -53,8 +53,8 @@ body:
     attributes:
       label: Release-readiness gate
       placeholder: |
-        - [ ] This tracker fingerprint matches its accepted activation record.
-        - [ ] Every required issue fingerprint still matches its accepted approval; every implementation issue is closed by a reviewed normal-merged PR, and every decision issue has a verified decision-closure record.
+        - [ ] This tracker fingerprint and canonical body-plus-receipt checklist hash match its accepted activation record.
+        - [ ] Every required issue in the seed rows plus receipt-backed checklist entries fingerprint still matches its accepted approval; every implementation issue is closed by a reviewed normal-merged PR, and every decision issue has a verified decision-closure record.
         - [ ] Every public change has a correct Changeset.
         - [ ] The release PR contains only this coherent capability.
         - [ ] Public exports, declarations, packed files, and showcase states were inspected.
@@ -87,7 +87,7 @@ body:
     attributes:
       label: Release hold
       options:
-        - label: The tracker cannot enter `status:in-progress` until an accepted approval record binds its current title, body, and milestone fingerprint.
+        - label: The tracker cannot enter `status:in-progress` until an accepted approval record binds its current title, body, milestone fingerprint, and canonical checklist hash.
           required: true
         - label: The generated Changesets release PR must remain unmerged until every gate above is satisfied.
           required: true
