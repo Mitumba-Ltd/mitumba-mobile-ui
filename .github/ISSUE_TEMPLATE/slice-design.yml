@@ -68,11 +68,13 @@ body:
       label: Decision deliverables
       placeholder: |
         - [ ] A proposal is posted and the issue moves to `status:needs-decision` plus `human-required`.
-        - [ ] An accepted approval record from the active user or a currently verified maintainer/admin binds the selected capability, components, dependencies, and deferrals to the current issue-contract fingerprint.
+        - [ ] An accepted approval record from the active user or a currently verified maintainer/admin binds the selected capability, components, dependencies, deferrals, exact immutable plan hash, issue/root/#5 fingerprints, root-checklist hash, and program-map hash.
+        - [ ] The immutable expansion plan predeclares every canonical output-receipt ref and expected root-checklist/program-map result before approval.
         - [ ] One `status:needs-brief` issue is created per approved component or concern.
-        - [ ] The slice tracker and milestone dependency checklist are updated.
+        - [ ] Every child or deferral added to an existing root receives a receipt-backed append-only `Queue-root checklist entry`; a fresh activation binds the resulting checklist hash before child work.
+        - [ ] Each new slice tracker and milestone is created in its approved final form, and #5 receives receipt-backed program-map entries without tracker-body replacement.
         - [ ] Each atomic issue is reviewed separately before receiving `status:ready` and `agent:eligible`.
-        - [ ] A decision-closure record identifies its own comment, links the accepted approval and fingerprint, selected outcome, created/updated issues, tracker/milestone mutations, deferrals, executing actor/time, and completed closure reason.
+        - [ ] A decision-closure record identifies its own comment, links the accepted approval/fingerprints/hashes, selected outcome, output receipts, created resources, append-only checklist/map entries, deferrals, executing actor/time, and completed closure reason.
         - [ ] Every closure-record fact is reverified from GitHub before this design issue closes without an implementation PR.
         - [ ] No implementation starts solely from this design issue.
     validations:
