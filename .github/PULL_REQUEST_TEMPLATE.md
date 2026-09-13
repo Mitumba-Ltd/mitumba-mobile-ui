@@ -4,8 +4,8 @@ Closes #<!-- exactly one atomic implementation issue -->
 
 - Milestone/slice:
 - Issue approval record and current fingerprint:
-- Active tracker activation record and current fingerprint:
-- Fingerprints revalidated immediately before PR creation at:
+- Active tracker activation record, current fingerprint, and canonical checklist hash:
+- Issue/root fingerprints and root-checklist/program-map hashes revalidated immediately before PR creation at:
 - Repository WIP slot ref:
 - Implementation dependencies are merged into the default branch and present in this branch base: yes / no / not applicable
 - Decision dependencies have verified decision-closure records: yes / no / not applicable
