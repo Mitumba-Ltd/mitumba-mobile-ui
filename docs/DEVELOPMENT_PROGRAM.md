@@ -22,7 +22,7 @@ GitHub issues and milestones are the live execution state. This document defines
 - [`0.10.0` milestone](https://github.com/Mitumba-Ltd/mitumba-mobile-ui/milestone/9) and [slice tracker #14](https://github.com/Mitumba-Ltd/mitumba-mobile-ui/issues/14)
 - [Extended discovery milestone](https://github.com/Mitumba-Ltd/mitumba-mobile-ui/milestone/10) and [discovery tracker #15](https://github.com/Mitumba-Ltd/mitumba-mobile-ui/issues/15)
 
-Each tracker body owns its canonical issue checklist. A fresh agent session starts from tracker #5, verifies the earliest active release tracker's accepted activation fingerprint and repository WIP slots, then queries its eligible milestone children rather than relying on copied status in documentation.
+Each queue root's canonical issue checklist is its seeded body rows plus authenticated, immutable-receipt-backed `Queue-root checklist entry` comments, hashed independently with the root fingerprint. Design-gated roots append approved child/deferral entries instead of replacing their tracker bodies; any nonempty extension requires a fresh activation bound to the resulting checklist hash before child selection. Program tracker #5's canonical root map is its seeded body checklist plus authenticated, immutable-receipt-backed `Program map entry` comments; future decision expansions append one entry per generated root or explicit deferral instead of replacing #5's body. A fresh agent session starts from tracker #5, verifies its current issue fingerprint and independently computed program-map hash, and verifies that it has no unresolved program-level recovery quarantine or incomplete recovery action, then verifies the single active release-or-discovery queue root's accepted activation fingerprint and repository WIP slots before querying that root's eligible milestone children. A recovery-blocked #5 is a global queue stop even when the root and slot refs otherwise appear valid; copied status in documentation never overrides live evidence.
 
 ## Program checkpoints
 
@@ -56,7 +56,7 @@ Expected after orders/trust, seller identity/store, and seller authoring present
 
 ### Extended product UI
 
-Messaging, confirmations and modal patterns, disputes and two-factor-authentication presentation, and VAZI experiences follow the core checkpoints. Each starts with discovery and becomes a numbered release only after its scope forms one coherent capability.
+Messaging, confirmations and modal patterns, disputes and two-factor-authentication presentation, and VAZI experiences follow the core checkpoints. Each starts with discovery and becomes a numbered release only after its scope forms one coherent capability. After the numbered `0.10.0` dependency is verifiably released, tracker #15 may receive an accepted fingerprint- and checklist-hash-bound activation as the non-publication queue root for its individually approved child decisions; completing it creates or defers later numbered slices but never creates a Changeset or release PR itself. Its bound is the accepted checklist of four named decision contracts and their deferrals—not the two-to-four-component coherence budget applied to each eventual numbered release—and no implementation issue or package change belongs to the discovery milestone.
 
 Version numbers are planning targets. The mobile UI engineer proposes the actual semantic version at release readiness from the accumulated public changes; only a later, separate direct active-user instruction naming the reviewed release PR and exact head SHA may authorize its normal expected-SHA merge, and GitHub Actions owns OIDC publication.
 
@@ -139,7 +139,7 @@ Seed one design/discovery issue for each area rather than speculative implementa
 3. disputes and two-factor-authentication presentation;
 4. VAZI experiences.
 
-A discovery issue may propose a numbered milestone and atomic component issues only after dependencies and a two-to-four-component capability are approved. Discovery tracker #15 is not a package release: after all four areas are promoted or explicitly deferred, it receives `status:complete` and closes without Changesets or OIDC publication.
+A discovery issue may propose one or more numbered milestones and sets of atomic component issues only after dependencies and each independently coherent two-to-four-component capability are approved. Discovery tracker #15 is not a package release: after all four areas are promoted or explicitly deferred, it receives `status:complete` and closes without Changesets or OIDC publication.
 
 ## Dependency spine
 
@@ -163,13 +163,16 @@ Dependencies are issue-level facts, not permission to stack branches. A dependen
 For intentionally undefined slices, the design issue must:
 
 1. inspect real buyer/seller flow requirements and approved earlier APIs;
-2. propose one coherent outcome and normally two to four public components;
+2. propose one coherent outcome with normally two to four public components, or—when the approved discovery contract requires or expressly permits an evidence-backed split—multiple sequential outcomes that each independently satisfy that same coherence and component budget;
 3. document non-goals, state and accessibility risks, platform behavior, dependency order, alternatives, and deferrals;
-4. move to `status:needs-decision` and obtain an accepted active-user or currently verified maintainer/admin approval record that names the selected contract and binds it to the current issue-contract fingerprint;
-5. create one detailed `status:needs-brief` issue per approved component or foundation concern;
-6. update the slice tracker and milestone;
-7. leave every new issue non-eligible until its individual contract has an accepted fingerprint-bound approval record;
-8. post and verify the prescribed decision-closure record, then close the design issue without an implementation PR.
+4. move to `status:needs-decision` and obtain an accepted active-user or currently verified maintainer/admin approval record that names every selected contract and binds it, the active root's current fingerprint/checklist hash, program tracker #5's current fingerprint/map hash, and one immutable expansion plan;
+5. execute that plan through the crash-safe, marker-keyed decision-expansion transaction in `docs/ISSUE_WORKFLOW.md`, using predeclared canonical output-key digests and only create-only, append-only, commutative field-preserving, or server-conditionally safe API mutations;
+6. create one detailed `status:needs-brief` issue per approved component or foundation concern;
+7. append one immutable-receipt-backed `Queue-root checklist entry` comment for every child or deferral added to an existing root, then obtain a fresh activation bound to its resulting checklist hash before child work resumes;
+8. create each separately coherent new slice tracker and milestone in its approved final form rather than using a non-conditional replacement;
+9. append one immutable-receipt-backed `Program map entry` comment to tracker #5 for every resulting queue root or explicit deferral;
+10. leave every new issue non-eligible until its individual contract has an accepted fingerprint-bound approval record;
+11. post and verify the prescribed expansion and decision-closure records, then close the design issue without an implementation PR.
 
 This lets the issue program grow continuously without pretending that today's guesses are approved future APIs.
 
@@ -178,7 +181,7 @@ This lets the issue program grow continuously without pretending that today's gu
 A checkpoint is reached only when:
 
 - every implementation issue is closed by its own reviewed, normal-merged PR after continuous fingerprint checks, while every decision issue has a verified decision-closure record linked to its accepted approval;
-- release trackers and milestones contain no hidden or contradictory scope;
+- release trackers and milestones contain no hidden or contradictory scope, and each activated root's body-plus-receipt checklist hash still matches its accepted activation;
 - all public changes have correct Changesets and deterministic showcase states;
 - accessibility, iOS/Android behavior, dynamic type, reduced motion, and low-end Android constraints are represented;
 - packed-package verification proves the npm artifact works in an isolated Expo consumer;
