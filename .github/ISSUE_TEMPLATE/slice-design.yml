@@ -1,0 +1,91 @@
+name: Release-slice design
+description: Resolve an intentionally undefined capability before creating component implementation issues.
+title: '[Design]: '
+labels:
+  - 'type:decision'
+  - 'status:needs-brief'
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form when the roadmap names a user capability but responsibly leaves the exact public components unresolved. The output is an approved issue set, not a large implementation PR.
+
+  - type: input
+    id: slice
+    attributes:
+      label: Target capability or milestone
+      placeholder: 0.8.0 — orders and trust
+    validations:
+      required: true
+
+  - type: textarea
+    id: outcomes
+    attributes:
+      label: App-enablement outcome
+      description: Describe the buyer or seller flows this slice must enable and how completion will be recognized.
+    validations:
+      required: true
+
+  - type: textarea
+    id: inputs
+    attributes:
+      label: Evidence and dependencies
+      description: Link consumer flows, earlier primitives, product decisions, comparable native patterns, and blocking issues.
+    validations:
+      required: true
+
+  - type: textarea
+    id: responsibilities
+    attributes:
+      label: Candidate UI responsibilities
+      description: Explore semantic responsibilities before naming components. Separate package presentation from app orchestration.
+    validations:
+      required: true
+
+  - type: textarea
+    id: state_risks
+    attributes:
+      label: State, accessibility, and platform risks
+      description: Identify the difficult content, async, error, offline, screen-reader, dynamic-type, reduced-motion, iOS/Android, and low-end Android cases.
+    validations:
+      required: true
+
+  - type: textarea
+    id: budget
+    attributes:
+      label: Proposed release budget
+      description: Select one coherent capability with normally two to four related public components. Explain every exception.
+      placeholder: |
+        Proposed public components: 2–4
+        Foundation work: ...
+        Deferred scope: ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: deliverables
+    attributes:
+      label: Decision deliverables
+      placeholder: |
+        - [ ] A proposal is posted and the issue moves to `status:needs-decision` plus `human-required`.
+        - [ ] An accepted approval record from the active user or a currently verified maintainer/admin binds the selected capability, components, dependencies, deferrals, exact immutable plan hash, issue/root/#5 fingerprints, root-checklist hash, and program-map hash.
+        - [ ] The immutable expansion plan predeclares every canonical output-receipt ref and expected root-checklist/program-map result before approval.
+        - [ ] One `status:needs-brief` issue is created per approved component or concern.
+        - [ ] Every child or deferral added to an existing root receives a receipt-backed append-only `Queue-root checklist entry`; a fresh activation binds the resulting checklist hash before child work.
+        - [ ] Each new slice tracker and milestone is created in its approved final form, and #5 receives receipt-backed program-map entries without tracker-body replacement.
+        - [ ] Each atomic issue is reviewed separately before receiving `status:ready` and `agent:eligible`.
+        - [ ] A decision-closure record identifies its own comment, links the accepted approval/fingerprints/hashes, selected outcome, output receipts, created resources, append-only checklist/map entries, deferrals, executing actor/time, and completed closure reason.
+        - [ ] Every closure-record fact is reverified from GitHub before this design issue closes without an implementation PR.
+        - [ ] No implementation starts solely from this design issue.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: authority
+    attributes:
+      label: Authority confirmation
+      options:
+        - label: This decision cannot silently move roadmap scope or authorize a package release.
+          required: true
+        - label: New dependencies, test infrastructure, and application responsibilities require separate approval.
+          required: true

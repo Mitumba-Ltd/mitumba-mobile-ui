@@ -1,0 +1,88 @@
+name: Native UI bug
+description: Report one reproducible package defect, accessibility regression, or platform inconsistency.
+title: '[Bug]: '
+labels:
+  - 'type:bug'
+  - 'status:needs-brief'
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Package version or commit
+      placeholder: '@mitumba/mobile-ui 0.1.0 or commit SHA'
+    validations:
+      required: true
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Affected platform
+      multiple: true
+      options:
+        - iOS
+        - Android
+        - Expo web showcase
+        - TypeScript declarations
+        - Packed npm artifact
+    validations:
+      required: true
+
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Actual and expected behavior
+      placeholder: |
+        Actual:
+        ...
+
+        Expected:
+        ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Give deterministic steps or a minimal repository. Remove credentials and personal data.
+    validations:
+      required: true
+
+  - type: textarea
+    id: state_matrix
+    attributes:
+      label: Triggering state and regression surface
+      description: Include props, content length, loading/error/offline state, font scale, screen reader, motion setting, device, and OS where relevant.
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: User, accessibility, and compatibility impact
+      description: Explain who is blocked, whether a public contract regressed, and whether a patch can remain backward compatible.
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Fix acceptance criteria
+      placeholder: |
+        - [ ] Root cause and affected public contract are documented.
+        - [ ] Fix is limited to this defect.
+        - [ ] Deterministic showcase reproduces the regression where applicable.
+        - [ ] Patch Changeset is included for a published-package fix.
+        - [ ] Repository validation and package verification pass.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: boundaries
+    attributes:
+      label: Report confirmation
+      options:
+        - label: I searched existing issues and this is one reproducible defect.
+          required: true
+        - label: The report contains no credentials, private application code, or personal data.
+          required: true
