@@ -1,0 +1,105 @@
+name: Repository process concern
+description: Propose one root-independent governance, automation, or documentation concern with zero release-budget impact.
+title: '[Process]: '
+labels:
+  - 'type:process'
+  - 'status:needs-brief'
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for one repository-process concern outside package release scope. Process work uses the shared WIP claim protocol but has no release milestone/root/checklist membership and no Changeset.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Process area
+      options:
+        - governance and policy
+        - repository automation
+        - CI or release process
+        - contributor documentation
+        - issue or pull-request templates
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Queue priority
+      description: Normal process work follows eligible release-root children. Select blocking only when the concern prevents safe repository operation, and explain why below.
+      options:
+        - normal
+        - blocks safe repository operation
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Repository problem and evidence
+      description: Describe the concrete policy, automation, or documentation failure and link current evidence.
+    validations:
+      required: true
+
+  - type: textarea
+    id: contract
+    attributes:
+      label: Scope, non-goals, and affected files
+      placeholder: |
+        Scope:
+        - ...
+
+        Affected files or settings:
+        - ...
+
+        Non-goals:
+        - package API or behavior
+        - showcase/component implementation
+        - release-root scope, checklist, milestone, or budget changes
+    validations:
+      required: true
+
+  - type: textarea
+    id: safety
+    attributes:
+      label: Authority, security, and recovery impact
+      description: Explain the exact `standing-policy`, positive-channel `durable-independent-human`, or same-runtime one-use `session-direct-active-kiro-user` authority used; scalar protected subject head SHAs and complete-object hash bindings; permissions, secrets, workflow execution, strict non-bypassable exact-base protection, publication, immutable policy activation/supersession, absent-mutex `preSelectionPolicyQuiescence`, exact-bound `selectedPolicyTransitionQuiescence`, terminal-only `policy-transition-completed` cutover, the fixed repository recovery mutex, recovery-abort non-self basis/closed option/authority-use/lineage/supersession/start-spend/terminal behavior, closed `decision-stop:v1`/`decision-stopped` abandonment, resource/not-sent/indeterminate/expiry outcomes for one-shot POST/decision-close-PATCH/normal-merge operations, complete commit envelopes, rollback/recovery, and truthful endpoint actor/canonicalizer implications. Ordinary comments and API `User` attribution are not durable human provenance. Mark non-applicable items explicitly.
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance and validation
+      placeholder: |
+        - [ ] One process issue, one never-reused branch, and one issue-closing PR deliver the concern.
+        - [ ] Release-root fields are `null`; tracker #5 fingerprint/map/recovery state and one global WIP slot remain bound.
+        - [ ] No package behavior, release milestone/checklist/map/budget, dependency, version, publication, or Changeset changes.
+        - [ ] Affected Markdown links and YAML/JSON/frontmatter/workflow syntax validate.
+        - [ ] Every affected decision keeps ownership through its canonical record, effects, closure-comment result, fixed issue-close PATCH outcome, and atomic `decision-closure-result:v1` plus branch/slot retirement. A sole terminal operation derives exact `decision-stop:v1` and `decision-stopped`; only `abandon-decision`, never `resume`, may consume it while preserving prefix/later absence and recording stop-source plus abandonment evidence. It leaves the issue unclosed and never validates; dependencies use `validateDecisionClosure` and only issue #16 has the exact predecessor adapter.
+        - [ ] Recovery-abort resolution preserves the original business subject, derives a closed option from a non-self-referential basis and the existing eight dispositions, consumes the exact human-authority use with one append-only lineage generation, and atomically creates the same-mutex/start/spend/child-edge transaction; stale or expired unspent generations are superseded, completion suppresses the subject, runtime loss fails closed, and another abort requires distinct fresh durable evidence with a new stable evidence key.
+        - [ ] Every common POST scope has exactly one terminal outcome per terminalized attempt: only its live winner records `pre-send-not-sent`; only positive immutable runtime termination tied to the original direct use records expiry indeterminacy; neither permits result, receipt, success, or retry; and pre-incident/incident abort plus mutex release is atomic with stale leases applying nothing.
+        - [ ] A protected policy merge stays predecessor-bound as `policy-transition-pending`. Only absent-mutex `preSelectionPolicyQuiescence` enumerates it; after selection exact-bound `selectedPolicyTransitionQuiescence` governs until one all-or-nothing transaction creates successor activation, predecessor supersession, zero/one unchanged-root `root-activation:v2`, recovery result, and terminal while deleting the exact mutex. Rejection leaves the predecessor active, and `policy-transition-completed` is terminal-only.
+        - [ ] Repository validation and package verification pass or every non-applicable check is explained.
+        - [ ] Authority uses exactly one canonical disjoint form whose statement bytes bind the complete subject and whose expected-absent use ref is atomically consumed with the first domain mutation; protected/signed durable evidence has stable independently verified provenance, ordinary comments or API `User`/null-App/permission observations are insufficient, and session-direct success completes in the receiving runtime.
+        - [ ] Conflicting policy text is removed or explicitly superseded.
+        - [ ] The outer operator verifies the exact-head canonical `semantic-review-bundle:v1` manifest, non-null pull-request tested integration, exact-base guard or truthful review-only absence, selected finite validation evidence, and deterministic artifact bytes; an independent read-only reviewer receives every byte for semantic inspection, and every confirmed finding is resolved.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: boundaries
+    attributes:
+      label: Process-lane confirmation
+      options:
+        - label: This issue is one root-independent process concern and has no release milestone.
+          required: true
+        - label: It will not be added to a release-root checklist or tracker #5 program map.
+          required: true
+        - label: It consumes a normal WIP slot, keeps recovery serialized through the separate fixed mutex, and follows canonical-bundle review plus non-null tested-integration, non-bypassable exact-base, durable normal-merge safeguards.
+          required: true
+        - label: Any discovered package, release-scope, credential, permission, or publication-ownership work will become a separate issue or genuine escalation.
+          required: true
+        - label: Changes to standing authority, custom-agent capability grants, human provenance, recovery trust, merge/publication ownership, or the escalation taxonomy require a canonical positive-channel `durable-independent-human` substance result whose subject uses scalar `core.headSha`, plus a separate exact-request, atomically one-use, same-runtime `session-direct-active-kiro-user` merge whose subject uses `request.core.headSha`; full objects remain hash-bound and successful outcome/result/postcondition publication is atomic.
+          required: true
