@@ -99,5 +99,5 @@ body:
           required: true
         - label: CSS recipes and browser behavior will not be copied into native code.
           required: true
-        - label: No dependency or test infrastructure is assumed without explicit approval.
+        - label: No dependency or test infrastructure is assumed unless already authorized by the accepted issue contract.
           required: true
