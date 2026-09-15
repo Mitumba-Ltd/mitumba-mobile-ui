@@ -131,7 +131,7 @@ body:
           required: true
         - label: The API is presentational and callback-driven; application orchestration remains outside the package.
           required: true
-        - label: No new dependency or test infrastructure is assumed without explicit approval.
+        - label: No new dependency or test infrastructure is assumed unless already authorized by the accepted issue contract.
           required: true
-        - label: A roadmap entry or milestone does not by itself authorize implementation, merge, or release.
+        - label: A roadmap entry or milestone cannot expand scope by itself; selection, review, merge, and release follow `docs/ISSUE_WORKFLOW.md`.
           required: true
