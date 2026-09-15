@@ -1,5 +1,5 @@
 name: Release-slice design
-description: Resolve an intentionally undefined capability before creating component implementation issues.
+description: Resolve an intentionally undefined capability before creating atomic implementation issues.
 title: '[Design]: '
 labels:
   - 'type:decision'
@@ -8,7 +8,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Use this form when the roadmap names a user capability but responsibly leaves the exact public components unresolved. The output is an approved issue set, not a large implementation PR.
+        Use this form when the roadmap names a user capability but responsibly leaves exact public components unresolved. The output is an evidence-backed decision and immutable issue-expansion plan, not a large implementation PR.
 
   - type: input
     id: slice
@@ -30,7 +30,7 @@ body:
     id: inputs
     attributes:
       label: Evidence and dependencies
-      description: Link consumer flows, earlier primitives, product decisions, comparable native patterns, and blocking issues.
+      description: Link consumer flows, earlier primitives, accepted product outcomes, comparable native patterns, and blocking issues.
     validations:
       required: true
 
@@ -46,7 +46,7 @@ body:
     id: state_risks
     attributes:
       label: State, accessibility, and platform risks
-      description: Identify the difficult content, async, error, offline, screen-reader, dynamic-type, reduced-motion, iOS/Android, and low-end Android cases.
+      description: Identify difficult content, async, error, offline, screen-reader, dynamic-type, reduced-motion, iOS/Android, and low-end Android cases.
     validations:
       required: true
 
@@ -63,29 +63,50 @@ body:
       required: true
 
   - type: textarea
+    id: boundaries
+    attributes:
+      label: Autonomous-decision boundary
+      description: Fix the accepted outcome, compatibility, architecture, dependency/security boundary, package ownership, release capability, budget, and deferrals. Identify any canonical genuine escalation that remains.
+      placeholder: |
+        Fixed outcome and package boundary: ...
+        Supported API/compatibility constraints: ...
+        Dependency and native-code constraints: ...
+        Release capability and maximum budget: ...
+        Genuine escalation requiring human authority: none / ...
+    validations:
+      required: true
+
+  - type: textarea
     id: deliverables
     attributes:
-      label: Decision deliverables
+      label: Decision and expansion deliverables
       placeholder: |
-        - [ ] A proposal is posted and the issue moves to `status:needs-decision` plus `human-required`.
-        - [ ] An accepted approval record from the active user or a currently verified maintainer/admin binds the selected capability, components, dependencies, deferrals, exact immutable plan hash, issue/root/#5 fingerprints, root-checklist hash, and program-map hash.
-        - [ ] The immutable expansion plan predeclares every canonical output-receipt ref and expected root-checklist/program-map result before approval.
-        - [ ] One `status:needs-brief` issue is created per approved component or concern.
-        - [ ] Every child or deferral added to an existing root receives a receipt-backed append-only `Queue-root checklist entry`; a fresh activation binds the resulting checklist hash before child work.
-        - [ ] Each new slice tracker and milestone is created in its approved final form, and #5 receives receipt-backed program-map entries without tracker-body replacement.
-        - [ ] Each atomic issue is reviewed separately before receiving `status:ready` and `agent:eligible`.
-        - [ ] A decision-closure record identifies its own comment, links the accepted approval/fingerprints/hashes, selected outcome, output receipts, created resources, append-only checklist/map entries, deferrals, executing actor/time, and completed closure reason.
-        - [ ] Every closure-record fact is reverified from GitHub before this design issue closes without an implementation PR.
-        - [ ] No implementation starts solely from this design issue.
+        - [ ] Repository, consumer, platform, and current official-documentation evidence is gathered.
+        - [ ] An independent investigator/reviewer is used when available.
+        - [ ] Viable alternatives, consequences, and deferrals are compared.
+        - [ ] The strongest bounded option is selected through a truthful autonomous decision record, or the issue stops at one named genuine escalation.
+        - [ ] The decision record identifies actor type, binds one exact canonical authority variant plus issue/root/#5 fingerprints, root-checklist/program-map hashes, evidence, rationale, and selected outcome, and never treats execution provenance as human authority.
+        - [ ] One immutable plan predeclares exact outputs, operations, expected states, and receipt refs before mutation.
+        - [ ] Only the closed issue-create, milestone-create, and issue-comment-append operations execute; no stale tracker-body replacement occurs.
+        - [ ] One `status:needs-brief` issue is created per selected component or concern.
+        - [ ] Receipt-backed checklist and program-map entries capture every generated child/root/deferral, with policy-scoped `root-activation:v2` reactivation under the unique active policy where required.
+        - [ ] Every new issue remains non-eligible until individually assessed against its exact fingerprint.
+        - [ ] The decision record, every issue/milestone/comment expansion POST, closure comment, and issue-close PATCH predeclare one fixed request/attempt/outcome/result or receipt namespace. Exactly one common POST outcome can claim each request: observed resource, winner-only `pre-send-not-sent`, request indeterminacy, or original-use-bound session-direct expiry; the terminal non-resource forms never create success, result, or receipt and never permit retry.
+        - [ ] The record, expansion or proven no-output effects, closure comment, fixed issue-close PATCH outcome, and final `decision-closure-result:v1` all validate; a direct-authority success atomically creates its outcome/result or outcome/receipt pair in the receiving runtime. A sole terminal not-sent/indeterminate/expiry or close-rejected operation instead derives exact `decision-stop:v1` and `decision-stopped`, preserves successful prefix and later absence with ownership live, and can be consumed only by `abandon-decision`, never `resume`; its terminal result set binds the stop source plus later abandonment and `validateDecisionClosure` stays false.
+        - [ ] No package implementation begins solely from this decision issue.
     validations:
       required: true
 
   - type: checkboxes
-    id: authority
+    id: safeguards
     attributes:
-      label: Authority confirmation
+      label: Decision safeguards
       options:
-        - label: This decision cannot silently move roadmap scope or authorize a package release.
+        - label: The decision cannot silently move roadmap scope, exceed the accepted budget, narrow compatibility, or authorize publication ownership changes.
           required: true
-        - label: New dependencies, test infrastructure, and application responsibilities require separate approval.
+        - label: Custom native code, materially impactful unapproved dependencies, tests/test infrastructure, and application responsibilities remain outside scope unless already accepted.
+          required: true
+        - label: Agent records identify agent actors; human authority carries the exact canonical subject statement and atomically consumed use ref, ordinary comments never become durable provenance, and one-use `session-direct-active-kiro-user` authority is same-runtime only. After the exact original use and positively authenticated immutable managed-runtime termination, ordinary record, expansion, closure-comment, and close operations permit only the fixed expiry-indeterminate outcome plus active-stop/mutex release—not success, result, receipt, effect, or retry.
+          required: true
+        - label: '`human-required` is used only when a canonical genuine escalation is concrete.'
           required: true
