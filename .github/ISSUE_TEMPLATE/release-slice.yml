@@ -1,5 +1,5 @@
 name: Release-slice tracker
-description: Track one coherent milestone and hold its generated release PR until readiness is verified.
+description: Track one coherent milestone through exact-candidate audit and verified OIDC publication.
 title: '[Slice]: '
 labels:
   - 'type:release'
@@ -44,52 +44,62 @@ body:
     id: changesets
     attributes:
       label: Expected version and Changesets
-      description: Record the proposed SemVer result in the seed contract; append release-impact evidence as comments when public-change PRs merge rather than replacing the tracker body.
+      description: Record the planning SemVer result; append release-impact evidence when public-change PRs merge rather than replacing this body.
     validations:
       required: true
 
   - type: textarea
     id: readiness
     attributes:
-      label: Release-readiness gate
+      label: Exact-candidate release audit
       placeholder: |
-        - [ ] This tracker fingerprint and canonical body-plus-receipt checklist hash match its accepted activation record.
-        - [ ] Every required issue in the seed rows plus receipt-backed checklist entries fingerprint still matches its accepted approval; every implementation issue is closed by a reviewed normal-merged PR, and every decision issue has a verified decision-closure record.
-        - [ ] Every public change has a correct Changeset.
-        - [ ] The release PR contains only this coherent capability.
-        - [ ] Public exports, declarations, packed files, and showcase states were inspected.
-        - [ ] `npm run validate` passes at the release candidate SHA.
-        - [ ] `npm run verify:package` passes at the release candidate SHA.
+        - [ ] Tracker #5 fingerprint/program-map/recovery state and the unique active-policy chain are current; no pending successor cutover, unsuppressed aborted subject, currently qualified resolution, malformed/forked lineage, or unsuperseded stale/expired generation passes the canonical gate. A pending successor is enumerable only under absent-mutex `preSelectionPolicyQuiescence`; a selected one requires exact-bound `selectedPolicyTransitionQuiescence` until an all-or-nothing terminal `policy-transition-completed` cutover, and never returns to release enumeration.
+        - [ ] Any authority-bound record uses exactly one canonical disjoint variant whose exact statement bytes and atomically consumed one-use ref validate; ordinary comments or API `User`/null-App/permission observations are not durable human provenance, and session-direct success completes in its receiving runtime.
+        - [ ] This tracker fingerprint and canonical checklist hash match its policy-scoped `root-activation:v2` under the unique active policy SHA.
+        - [ ] Every canonical issue fingerprint and dependency is current; implementation PRs are independently reviewed and normally merged, and every canonical decision issue passes `validateDecisionClosure` through one canonical `decision-closure-result:v1` or the sole exact issue #16 adapter.
+        - [ ] The slice remains one coherent capability within budget.
+        - [ ] Every public change has a correct Changeset and the generated SemVer/changelog is expected.
+        - [ ] Public exports, declarations, docs, licenses, packed files, and showcase states were inspected.
+        - [ ] `npm run validate` passes at the candidate SHA.
+        - [ ] `npm run verify:package` passes at the candidate SHA.
         - [ ] `npx expo install --check` passes from `apps/showcase`.
-        - [ ] CI and Publish preparation checks are green.
-        - [ ] The agent posted a release-readiness recommendation.
+        - [ ] Required feature, main, CI, and Publish-preparation workflows are green or a zero-job automation event is explicitly reconciled.
+        - [ ] The generated release PR's exact head/current base/non-null tested merge commit/tree, current exact-base guard, and canonical bundle manifest/artifact bytes have outer verification plus a passing byte-complete independent `semantic-review:v1` verdict.
+        - [ ] The release-audit record binds expected version/dist-tag, PR head, reviewed base, tested integration, exact-base guard, canonical bundle hash/artifacts, finite validation evidence, fingerprints/hashes, findings, and semantic assessment.
     validations:
       required: true
 
   - type: textarea
     id: publication
     attributes:
-      label: Post-authorization publication record
-      description: Complete only after a separate direct instruction from the active user names and authorizes the exact generated release PR and reviewed head SHA, and it merges normally with that SHA as a precondition.
+      label: OIDC publication and verification record
+      description: Complete after the exact audited release head normally merges under the standing policy and the resulting Publish run reaches a terminal conclusion.
       placeholder: |
         Success:
-        - [ ] Record the published version, npm provenance URL, workflow run, and release commit.
-        - [ ] Apply `status:released`, close this tracker, and close the milestone.
+        - [ ] Record release PR/head/merge commit and source commit.
+        - [ ] Record Publish run/jobs and terminal conclusion.
+        - [ ] Verify npm version, intended dist-tag, installable package/tarball, and provenance source identity.
+        - [ ] Apply `status:released`, close this tracker and milestone, and evaluate the next root.
 
         Failure:
-        - [ ] Apply `status:blocked` and `human-required`.
-        - [ ] Keep this tracker and milestone open; diagnose without local publication or bypasses.
+        - [ ] Record exact logs and observed registry/provenance state; apply `status:blocked`.
+        - [ ] Open one bounded repair issue when a uniquely safe repository fix exists.
+        - [ ] Add `human-required` only for a canonical genuine escalation.
     validations:
       required: true
 
   - type: checkboxes
-    id: hold
+    id: safeguards
     attributes:
-      label: Release hold
+      label: Release safeguards
       options:
-        - label: The tracker cannot enter `status:in-progress` until an accepted approval record binds its current title, body, milestone fingerprint, and canonical checklist hash.
+        - label: The tracker cannot enter `status:in-progress` until a truthful activation record binds its title, body, milestone fingerprint, and canonical checklist hash.
           required: true
-        - label: The generated Changesets release PR must remain unmerged until every gate above is satisfied.
+        - label: The generated Changesets PR remains unmerged until every exact-candidate audit gate above passes.
           required: true
-        - label: The agent may recommend a version and readiness, but only a separate direct active-user instruction naming the reviewed release PR and exact head SHA may authorize its normal expected-SHA merge; GitHub Actions alone publishes through OIDC.
+        - label: Merge uses the reviewed exact head/base/non-null tested integration only while strict required-status-check protection gives a non-bypassable server exact-base guard and no successor-policy cutover is pending; exactly one fixed outcome can claim the request. A live winner that proves HTTP was never initiated records only common `pre-send-not-sent`, while positively authenticated termination of the original direct-authority runtime records only expiry indeterminacy, including for an open or visibly merged protected PR. Neither terminal form creates success, result, or receipt or permits retry, and any head, base, tested-integration, guard, or bundle change requires fresh validation and semantic review.
+          required: true
+        - label: GitHub Actions alone publishes through OIDC; local/manual publication, token fallback, and generated-version edits are prohibited.
+          required: true
+        - label: Routine readiness, merge, OIDC monitoring, and deterministic repair do not add `human-required`.
           required: true
