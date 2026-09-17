@@ -6,7 +6,7 @@
 
 The absence of CSS is not a reduced design target. Native quality comes from platform primitives, touch and gesture behavior, dynamic type, safe-area and keyboard handling, screen-reader semantics, motion preferences, and predictable performance on real iOS and Android devices.
 
-This document is the working sequence for releases after `0.1.0`. It is a planning contract, not independent permission to change scope or publish. Every slice still requires a fingerprint-bound, policy-scoped `root-activation:v2` and individual issue contracts; `docs/ISSUE_WORKFLOW.md` supplies guarded standing authority from the unique immutable active-policy chain for canonical-bundle exact-head semantic review, normal merge, release audit, and queue continuation, while npm publication remains GitHub Actions OIDC-only. A protected successor policy remains predecessor-bound: `preSelectionPolicyQuiescence` may enumerate it only with absent current mutex/start and a blocker-free, fully visible terminal-history classification in which every prior start is completed or its abort is uniquely suppressed by a later authority/lineage/spend/subject-equal resolution-bound completion; unresolved/current/competing/unsuppressed/malformed starts and conflicting resolutions block. Exact-bound `selectedPolicyTransitionQuiescence` then governs the selected start while retaining and revalidating that byte-identical historical set, rejecting history changes or new starts, and only an atomic terminal `policy-transition-completed` activation/supersession/optional unchanged-root cutover advances the chain. Roadmap work never migrates an in-flight identity or treats a rejected cutover as activation.
+This document is the working sequence for releases after `0.1.0`. It sets sequencing and quality expectations; `docs/ISSUE_WORKFLOW.md` defines how work is briefed, built, reviewed, merged, and published. Scope must not move silently between slices, and npm publication remains GitHub Actions OIDC only.
 
 ## Architecture contract
 
@@ -66,12 +66,11 @@ Do not start a broad catalog while API or state decisions remain unresolved. A b
 `docs/DEVELOPMENT_PROGRAM.md` defines app-enablement checkpoints and the dependency spine. `docs/ISSUE_WORKFLOW.md` defines the executable queue, issue states, work-in-progress limit, PR-closing contract, and release-readiness decision.
 
 - Every known component or foundation concern receives one detailed issue and one implementation PR.
-- Intentionally undefined slices receive a design issue first; approved design work creates the later atomic implementation issues.
-- Root-child work requires `status:ready` plus `agent:eligible`, matching accepted fingerprints, and membership in a tracker currently activated under the unique active policy SHA. Root-independent `type:process` work follows the process lane and never enters a release checklist or budget.
-- Each active claim atomically acquires one of two repository-wide WIP-slot refs plus its issue branch; each implementation PR retains that slot through review.
+- Intentionally undefined slices receive a design issue first; the accepted design creates the later atomic implementation issues.
+- An issue is buildable when it carries `status:ready`, its contract describes the behavior and states to deliver, and its dependencies have merged. `type:process` work stays out of release checklists and budgets.
 - Each implementation PR contains `Closes #<issue>` and must not absorb follow-up scope.
 - GitHub milestones and slice trackers are the live execution state; this roadmap remains the sequencing and quality contract.
-- The operator consumes independent eligible concerns sequentially, reconstructs durable GitHub state after runtime limits, and continues ordinary review, merge, release, and queue phases without a new routine authorization.
+- The operator works eligible concerns sequentially, resumes from GitHub state after any interruption, and continues review, merge, and release phases without routine reauthorization.
 
 ## Release operating model
 
@@ -82,9 +81,9 @@ Do not start a broad catalog while API or state decisions remain unresolved. A b
 - Foundations may ship before a visible marketplace component when they remove duplication or establish an accessibility contract required by the next slice.
 - Public behavior changes require a Changeset; internal documentation-only planning does not.
 - Test infrastructure or new tests are added only when the task explicitly approves that work.
-- The operator implements bounded PRs and Changesets, cryptographically verifies the canonical exact-head/base/non-null-tested-integration manifest, current exact-base guard or truthful review-only absence, and every deterministic artifact attachment, obtains independent byte-complete semantic inspection, and normally merges only while strict required-status-check protection provably rejects base drift without executor bypass; missing capability escalates rather than weakening the gate, and release scope never expands independently.
-- The operator owns evidence-based release audit, the expected semantic version, exact-head generated-release review, fixed attempt/outcome/result normal merge, OIDC monitoring, registry/provenance verification, and queue continuation; GitHub Actions alone publishes.
-- Changesets may open a release PR after the first public-change PR in a slice. Keep it unmerged until the milestone tracker is `status:release-ready`.
+- The operator implements bounded PRs with Changesets, obtains an independent review of the exact head, and merges with a normal merge commit once that head is green and conflict-free. Release scope never expands on its own.
+- The operator owns the release audit, the expected semantic version, the generated-release review, the merge, OIDC monitoring, and registry and provenance verification; GitHub Actions alone publishes.
+- Changesets may open a release PR after the first public-change PR in a slice. Keep it unmerged until the slice is complete, so one slice ships under one version instead of being split across several.
 - Human- or agent-authored commits must be extremely atomic and include:
 
   ```text
@@ -105,13 +104,17 @@ Versions are sequencing targets and may move after an approved brief or an urgen
 
 Establish the reusable behavior needed by later marketplace components.
 
+- public component naming convention — decided
+- reduced-motion policy — shipped to `main`
+- native elevation policy — shipped to `main`
 - `Surface`
 - `IconButton`
 - `Skeleton`
 - `Progress`
-- reduced-motion and native elevation policies
 - richer showcase coverage for foundation states
 - test substrate only if separately and explicitly approved
+
+This slice ships as a single `0.2.0` cut. The foundations are merged but deliberately unreleased: a reduced-motion hook and an elevation record give consumer apps little until `Skeleton`, `Progress`, and `Surface` consume them, and cutting early would push every component to `0.3.0` and renumber the slices below.
 
 ### `0.3.0` — buyer listing tile
 
