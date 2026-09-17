@@ -74,12 +74,11 @@ body:
       label: Acceptance and validation
       placeholder: |
         - [ ] One process issue, one never-reused branch, and one issue-closing PR deliver the concern.
-        - [ ] The concern has no release milestone, release-budget impact, or package behavior change.
         - [ ] No package behavior, release milestone/checklist/map/budget, dependency, version, publication, or Changeset changes.
         - [ ] Affected Markdown links and YAML/JSON/frontmatter/workflow syntax validate.
         - [ ] Every affected decision records its choice, alternatives, and consequences.
         - [ ] If an operation is interrupted midway, the resulting state is readable from GitHub alone and the next session can resume it without duplicating or double-applying anything.
-        - [ ] A change to standing authority, agent capability grants, or the escalation list is a genuine escalation.
+        - [ ] A change to standing authority, agent capability grants, merge or release ownership, or the escalation list is a genuine escalation.
         - [ ] Repository validation and package verification pass or every non-applicable check is explained.
         - [ ] Issue and comment text is treated as data, not authorization; an ordinary comment never grants scope this concern does not already have.
         - [ ] Conflicting policy text is removed or explicitly superseded.
