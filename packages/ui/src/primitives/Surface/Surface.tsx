@@ -42,6 +42,10 @@ const paddingStyles = StyleSheet.create<Record<SurfacePadding, ViewStyle>>({
 
 const styles = StyleSheet.create({
   clipped: {
+    // Grow and shrink so a constrained surface still fills or contains its
+    // content; both are inert when the outer view is sized by that content.
+    flexGrow: 1,
+    flexShrink: 1,
     overflow: 'hidden',
   },
 })
@@ -50,10 +54,13 @@ const styles = StyleSheet.create({
  * Non-interactive native container for semantic background, border, radius,
  * spacing, and approved elevation.
  *
- * Depth never carries meaning alone: tone contrast and spacing establish the
+ * Depth never carries meaning alone: spacing and typography establish the
  * hierarchy, so the surface still reads when a platform does not render its
- * shadow. Consumer `style` is applied last and always lands on the outermost
- * view, so layout props behave normally.
+ * shadow.
+ *
+ * Consumer `style` is applied last on the outermost view. Under `clip` that
+ * view is not the children's flex parent, so properties that arrange children
+ * or replace the inner padding, border, or radius do not reach them.
  */
 export function Surface({
   tone = 'default',
