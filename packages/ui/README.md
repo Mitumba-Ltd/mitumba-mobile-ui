@@ -83,15 +83,15 @@ export function DeterministicPreview() {
 
 ### State contract
 
-| Effective state                                       | `useReducedMotion()` | Subscription behavior                                 |
-| ----------------------------------------------------- | -------------------- | ----------------------------------------------------- |
-| System preference disabled                            | `false`              | Shared listener remains active                        |
-| System preference enabled                             | `true`               | Shared listener remains active                        |
-| System preference changes while mounted               | New boolean          | Subscribers update without remounting                 |
-| Initial query pending                                 | `true`               | Conservative static fallback until the query resolves |
-| Platform query/listener unavailable or throws/rejects | `true`               | Stable conservative fallback                          |
-| Nearest provider has `value={true}`                   | `true`               | No platform subscription for that consumer            |
-| Nearest provider has `value={false}`                  | `false`              | No platform subscription for that consumer            |
+| Effective state                                                 | `useReducedMotion()` | Subscription behavior                                 |
+| --------------------------------------------------------------- | -------------------- | ----------------------------------------------------- |
+| System preference disabled                                      | `false`              | Shared listener remains active                        |
+| System preference enabled                                       | `true`               | Shared listener remains active                        |
+| System preference changes while mounted                         | New boolean          | Subscribers update without remounting                 |
+| Initial query pending                                           | `true`               | Conservative static fallback until the query resolves |
+| Platform value unavailable, non-boolean, throwing, or rejecting | `true`               | Stable conservative fallback                          |
+| Nearest provider has `value={true}`                             | `true`               | No platform subscription for that consumer            |
+| Nearest provider has `value={false}`                            | `false`              | No platform subscription for that consumer            |
 
 The system path is lazy and shared across the package. The first unoverridden subscriber installs one native listener before querying the current value, preventing a query/listener gap. A runtime event supersedes any older pending query. Additional consumers reuse the same snapshot and listener; the last unsubscribe removes the listener, invalidates pending work, and resets the unobserved snapshot to `true`. Importing the package performs no accessibility query or subscription.
 
