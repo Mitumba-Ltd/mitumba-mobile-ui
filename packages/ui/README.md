@@ -53,6 +53,7 @@ console.log(mobileTheme.colors.green)
 - `useReducedMotion` exposes the effective native reduced-motion policy.
 - `ReducedMotionProvider` supplies a deterministic policy to one controlled subtree.
 - `elevation` maps semantic depth levels to native Android and iOS surface styles.
+- `Surface` provides a non-interactive container with semantic tone, radius, spacing, and depth.
 
 Only exports from the package root are public API. Imports into `src/` or `lib/` are unsupported.
 
@@ -121,6 +122,48 @@ The provider-plus-hook design is the narrowest contract that supports reusable n
 - An internal-only policy was rejected because both effective states could not be rendered deterministically through the public package boundary.
 
 The provider owns only a scoped fixed value; the hook remains the one API components consume. Store, context, subscription, query ordering, and race handling stay private implementation details.
+
+## Surface
+
+`Surface` is the non-interactive container the rest of the system builds on. It owns semantic background, corner rounding, inner spacing, an optional hairline border, and a depth level from the elevation policy. It has no press behaviour; an interactive container is a separate control.
+
+```tsx
+import { MitumbaText, Surface } from '@mitumba/mobile-ui'
+
+export function ListingCard() {
+  return (
+    <Surface elevation="raised" radius="large">
+      <MitumbaText variant="title" weight="semibold">
+        Vintage denim jacket
+      </MitumbaText>
+    </Surface>
+  )
+}
+```
+
+| Prop        | Values                                       | Default       |
+| ----------- | -------------------------------------------- | ------------- |
+| `tone`      | `default`, `subtle`, `strong`                | `default`     |
+| `elevation` | `flat`, `raised`, `overlay`                  | `flat`        |
+| `radius`    | `none`, `small`, `medium`, `large`, `pill`   | `medium`      |
+| `padding`   | `none`, `compact`, `comfortable`, `spacious` | `comfortable` |
+| `bordered`  | `boolean`                                    | `false`       |
+| `clip`      | `boolean`                                    | `false`       |
+
+### Tone and text pairing
+
+`default` uses the surface colour, `subtle` uses the page background for a recessed area, and `strong` uses the dark brand green. No tone sets a text colour, so pair `strong` with `MitumbaText` tone `inverse`; that combination is 4.9:1. Hierarchy comes from tone contrast and spacing rather than depth, so a surface still reads when a platform does not render its shadow.
+
+### Clipping
+
+`clip` exists because `overflow: 'hidden'` removes the iOS shadow of the view that clips. When `clip` is set, `Surface` renders an inner clipping view and keeps the depth on the outer one, so a rounded image or a coloured bleed can sit flush inside an elevated surface without losing the shadow on either platform. The outer view keeps the tone background because Android composites elevation from the background, so an elevated transparent view would draw nothing.
+
+### Composition rules
+
+- Consumer `style` is applied last and always lands on the outermost view, so margin, width, and flex behave normally.
+- Do not nest `raised` inside `raised`. Promote the outer surface to `overlay`, or separate the inner one with `tone="subtle"` and spacing.
+- `Surface` is presentational and stateless. Loading, empty, error, and offline presentation belong to the components that compose it.
+- Every treatment is a static style object, so repeated use in long lists adds no per-render work; `clip` adds exactly one view.
 
 ## Elevation
 
