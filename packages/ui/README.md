@@ -169,7 +169,8 @@ The inner view grows and shrinks, so a constrained surface such as `style={{ hei
 ### Composition rules
 
 - Consumer `style` is applied last on the outermost view, so the surface's own margin, width, and flex participation behave normally.
-- Under `clip`, that outer view is not the children's flex parent. `gap`, `flexDirection`, `alignItems`, `justifyContent`, and `flexWrap` passed through `style` arrange the inner wrapper rather than the children, and a `padding`, `borderWidth`, or `borderRadius` override composes with the inner values instead of replacing them. Wrap the children in your own `View` when you need to arrange them inside a clipped surface.
+- Under `clip`, that outer view is not the children's flex parent. `gap`, `flexDirection`, `alignItems`, and `flexWrap` passed through `style` arrange the inner wrapper rather than the children; `justifyContent` does nothing at all, because the wrapper already fills the main axis; and a `padding`, `borderWidth`, or `borderRadius` override composes with the inner values instead of replacing them. Wrap the children in your own `View` when you need to arrange them inside a clipped surface.
+- A clipped surface with a constrained height truncates content that outgrows it rather than overflowing, which is the point of clipping but also means long text can be cut at large font scales. Leave the height unconstrained when the content must always be readable.
 - Do not nest `raised` inside `raised`. Promote the outer surface to `overlay`, or separate the inner one with `tone="subtle"` and spacing.
 - A clipped surface clips its descendants' shadows. Do not place a `raised` or `overlay` surface inside a `clip` surface; give the inner one a tone and a border instead.
 - `Surface` is presentational and stateless. Loading, empty, error, and offline presentation belong to the components that compose it.
