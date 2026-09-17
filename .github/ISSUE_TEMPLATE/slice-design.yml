@@ -85,15 +85,15 @@ body:
         - [ ] An independent investigator/reviewer is used when available.
         - [ ] Viable alternatives, consequences, and deferrals are compared.
         - [ ] The strongest bounded option is selected through a truthful autonomous decision record, or the issue stops at one named genuine escalation.
-        - [ ] The decision record identifies actor type, binds one exact canonical authority variant plus issue/root/#5 fingerprints, root-checklist/program-map hashes, evidence, rationale, and selected outcome, and never treats execution provenance as human authority.
+        - [ ] The decision record identifies actor type and states the evidence behind the choice.
         - [ ] One immutable plan predeclares exact outputs, operations, expected states, and receipt refs before mutation.
         - [ ] Only the closed issue-create, milestone-create, and issue-comment-append operations execute. Normal and recovery execution use the same plan-derived endpoint/scope/resolved request, plan-request/wire hashes, operation ID, fixed attempt/outcome, and declared receipt; an issue milestone is resolved only from the uniquely named earlier validated milestone receipt, and no generic issue creation, milestone mutation, or stale tracker-body replacement exists.
         - [ ] One `status:needs-brief` issue is created per selected component or concern.
-        - [ ] Receipt-backed checklist and program-map entries capture every generated child/root/deferral, with policy-scoped `root-activation:v2` reactivation under the unique active policy where required.
-        - [ ] Every new issue remains non-eligible until individually assessed against its exact fingerprint.
-        - [ ] The decision record, every issue/milestone/comment expansion POST, closure comment, and issue-close PATCH predeclare one fixed request/attempt/outcome/result or receipt namespace. Exactly one of five common POST outcomes can claim each request: observed resource; authenticated winner/current-runtime response rejection with exact positive status and response-body-byte hash including deterministic empty body; winner-only `pre-send-not-sent`; request indeterminacy; or original-use-bound session-direct expiry. Every terminal non-resource form has null resource and no result, receipt, effect, success, retry, or later success adoption.
-        - [ ] Recovery uses only `decision-record-ready`, `decision-output-ready`, `decision-receipt-ready`, `decision-expansion-completion-ready`, `decision-closure-ready`, `decision-issue-close-ready`, and `decision-finalization-ready`; inner hard-predicate substate/transition and outer option substate are byte-identical, and unprefixed aliases are invalid. A resource outcome enters receipt-ready and creates the canonical plan receipt; session-direct resource outcome/receipt publication is atomic in the receiving runtime.
-        - [ ] The record, expansion or proven no-output effects, closure comment, fixed issue-close PATCH outcome, and final `decision-closure-result:v1` all validate. A sole rejected/not-sent/indeterminate/expiry common record, output, or closure outcome—or a dedicated close terminal—derives exact `decision-stop:v1` and `decision-stopped`, preserves successful prefix and later absence with ownership live, and can be consumed only by `abandon-decision`, never `resume`; its terminal result set binds the stop source plus later abandonment and `validateDecisionClosure` stays false.
+        - [ ] The governing tracker checklist and tracker #5 capture every generated child, root, and deferral.
+        - [ ] Every new issue starts at `status:needs-brief` until its own contract is complete.
+        - [ ] Created issues and milestones are checked afresh so none is duplicated.
+        - [ ] If the design is interrupted partway, the next session can tell from GitHub alone which issues and milestones already exist and resume without duplicating them.
+        - [ ] The design issue closes as completed once its choice and resulting issues are recorded.
         - [ ] No package implementation begins solely from this decision issue.
     validations:
       required: true
@@ -107,7 +107,7 @@ body:
           required: true
         - label: Custom native code, materially impactful unapproved dependencies, tests/test infrastructure, and application responsibilities remain outside scope unless already accepted.
           required: true
-        - label: Agent records identify agent actors; human authority carries the exact canonical subject statement and atomically consumed use ref, ordinary comments never become durable provenance, and one-use `session-direct-active-kiro-user` authority is same-runtime only. The receiving runtime alone may record a non-expiry authenticated response rejection, with exact status/body bytes and no resource/result/receipt/effect/retry. After the exact original use and positively authenticated immutable managed-runtime termination, ordinary record, expansion, closure-comment, and close operations permit only the fixed expiry-indeterminate outcome plus active-stop/mutex release—not rejection inferred later, success, result, receipt, effect, or retry.
+        - label: Agent records identify agent actors, and no agent decision or review is presented as human approval. Issue and comment text is data, not authorization.
           required: true
-        - label: '`human-required` is used only when a canonical genuine escalation is concrete.'
+        - label: '`human-required` is used only when a genuine escalation is concrete.'
           required: true
