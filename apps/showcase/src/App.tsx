@@ -7,6 +7,7 @@ import {
   MitumbaButton,
   MitumbaText,
   ReducedMotionProvider,
+  Surface,
   elevation,
   mobileTheme,
   useReducedMotion,
@@ -44,7 +45,7 @@ function ReducedMotionStatus({ description, label }: ReducedMotionStatusProps) {
   const reduceMotion = useReducedMotion()
 
   return (
-    <View style={styles.policyCard}>
+    <Surface bordered style={styles.policyCard}>
       <MitumbaText weight="semibold">{label}</MitumbaText>
       <MitumbaText
         accessibilityLiveRegion="polite"
@@ -56,7 +57,7 @@ function ReducedMotionStatus({ description, label }: ReducedMotionStatusProps) {
       <MitumbaText tone="secondary" variant="caption">
         {description}
       </MitumbaText>
-    </View>
+    </Surface>
   )
 }
 
@@ -155,6 +156,125 @@ export function App() {
             </View>
           </ShowcaseSection>
 
+          <ShowcaseSection title="Surface">
+            <MitumbaText tone="secondary">
+              Semantic tone, radius, spacing, border, and depth. Hierarchy holds without the shadow,
+              and clipped content keeps its iOS shadow.
+            </MitumbaText>
+
+            <Surface>
+              <MitumbaText weight="semibold">Default tone</MitumbaText>
+              <MitumbaText tone="secondary" variant="caption">
+                Surface colour, medium radius, comfortable padding.
+              </MitumbaText>
+            </Surface>
+
+            <Surface>
+              <MitumbaText weight="semibold">Subtle, recessed inside a surface</MitumbaText>
+              <Surface bordered padding="compact" radius="small" tone="subtle">
+                <MitumbaText tone="secondary" variant="caption">
+                  Subtle only reads inside another surface, never on the page background.
+                </MitumbaText>
+              </Surface>
+            </Surface>
+
+            <Surface tone="strong" radius="large" padding="spacious">
+              <MitumbaText tone="inverse" weight="semibold">
+                Strong tone
+              </MitumbaText>
+              <MitumbaText tone="inverse" variant="caption">
+                Paired with inverse text at 5.3:1. The only tone with a findable edge.
+              </MitumbaText>
+            </Surface>
+
+            <Surface elevation="raised">
+              <MitumbaText weight="semibold">Raised</MitumbaText>
+              <MitumbaText tone="secondary" variant="caption">
+                Card depth above the page background.
+              </MitumbaText>
+            </Surface>
+
+            <Surface elevation="overlay" radius="large">
+              <MitumbaText weight="semibold">Overlay</MitumbaText>
+              <MitumbaText tone="secondary" variant="caption">
+                Sheet and menu depth.
+              </MitumbaText>
+            </Surface>
+
+            <Surface clip elevation="raised" padding="none" radius="large">
+              <View style={styles.surfaceBleed}>
+                <MitumbaText tone="inverse" variant="caption" weight="bold">
+                  CLIPPED BLEED
+                </MitumbaText>
+              </View>
+              <View style={styles.surfaceBleedBody}>
+                <MitumbaText tone="secondary" variant="caption">
+                  The inner view clips to the radius while the shadow stays on the outer view.
+                </MitumbaText>
+              </View>
+            </Surface>
+
+            <Surface bordered clip padding="none" radius="small">
+              <View style={styles.surfaceBleed}>
+                <MitumbaText tone="inverse" variant="caption" weight="bold">
+                  BORDERED AND CLIPPED
+                </MitumbaText>
+              </View>
+              <View style={styles.surfaceBleedBody}>
+                <MitumbaText tone="secondary" variant="caption">
+                  The bleed reaches the clipped corner and the border sits on the same inner view.
+                </MitumbaText>
+              </View>
+            </Surface>
+
+            <Surface tone="subtle" padding="compact">
+              <MitumbaText weight="semibold">Nested surfaces</MitumbaText>
+              <Surface bordered padding="compact" radius="small">
+                <MitumbaText tone="secondary" variant="caption">
+                  Separated by tone and border rather than stacked depth.
+                </MitumbaText>
+              </Surface>
+            </Surface>
+
+            <Surface
+              accessibilityLabel="Accessibility grouping. A screen reader announces this surface as one element because the caller asked for it."
+              accessible
+              bordered
+            >
+              <MitumbaText weight="semibold">Accessibility grouping</MitumbaText>
+              <MitumbaText tone="secondary" variant="caption">
+                A screen reader announces this surface as one element because the caller asked for
+                it. Surface adds no role of its own.
+              </MitumbaText>
+            </Surface>
+
+            <Surface bordered clip elevation="raised" padding="none" style={styles.surfaceFixed}>
+              <View style={styles.surfaceFill}>
+                <MitumbaText tone="inverse" variant="caption" weight="bold">
+                  CONSTRAINED AND FILLED
+                </MitumbaText>
+                <MitumbaText tone="inverse" variant="caption">
+                  The clipping view grows to the fixed height, so this block fills it.
+                </MitumbaText>
+              </View>
+            </Surface>
+
+            <Surface elevation="raised" padding="spacious">
+              <MitumbaText variant="title" weight="semibold">
+                Long content at large font scale
+              </MitumbaText>
+              <MitumbaText>
+                Padding, radius, and depth are fixed values rather than ratios, so the frame does
+                not scale with the text. That is the deliberate trade-off: the copy reflows and the
+                surface grows to contain it, and nothing here truncates the sentence to fit.
+              </MitumbaText>
+              <MitumbaText tone="secondary" variant="caption">
+                Nothing constrains the height, so the surface grows with the text. Increase the
+                device font size to check the reflow.
+              </MitumbaText>
+            </Surface>
+          </ShowcaseSection>
+
           <ShowcaseSection title="Elevation">
             <MitumbaText tone="secondary">
               Semantic depth levels resolved for this platform. Every level keeps a background and
@@ -229,10 +349,24 @@ const styles = StyleSheet.create({
   },
   policyCard: {
     gap: mobileTheme.spacing.sm,
-    backgroundColor: mobileTheme.colors.surface,
-    borderColor: mobileTheme.semanticColors.actions.secondary.border,
-    borderRadius: mobileTheme.radius.lg,
-    borderWidth: StyleSheet.hairlineWidth,
+  },
+  surfaceFixed: {
+    height: 132,
+  },
+  surfaceFill: {
+    flex: 1,
+    gap: mobileTheme.spacing.xs,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: mobileTheme.semanticColors.text.brand,
+    padding: mobileTheme.spacing.lg,
+  },
+  surfaceBleed: {
+    alignItems: 'center',
+    backgroundColor: mobileTheme.semanticColors.text.earth,
+    paddingVertical: mobileTheme.spacing.xxl,
+  },
+  surfaceBleedBody: {
     padding: mobileTheme.spacing.lg,
   },
   elevationGrid: {

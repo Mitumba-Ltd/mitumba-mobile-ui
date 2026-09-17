@@ -53,6 +53,7 @@ console.log(mobileTheme.colors.green)
 - `useReducedMotion` exposes the effective native reduced-motion policy.
 - `ReducedMotionProvider` supplies a deterministic policy to one controlled subtree.
 - `elevation` maps semantic depth levels to native Android and iOS surface styles.
+- `Surface` provides a non-interactive container with semantic tone, radius, spacing, and depth.
 
 Only exports from the package root are public API. Imports into `src/` or `lib/` are unsupported.
 
@@ -121,6 +122,59 @@ The provider-plus-hook design is the narrowest contract that supports reusable n
 - An internal-only policy was rejected because both effective states could not be rendered deterministically through the public package boundary.
 
 The provider owns only a scoped fixed value; the hook remains the one API components consume. Store, context, subscription, query ordering, and race handling stay private implementation details.
+
+## Surface
+
+`Surface` is the non-interactive container the rest of the system builds on. It owns semantic background, corner rounding, inner spacing, an optional hairline border, and a depth level from the elevation policy. It has no press behaviour; an interactive container is a separate control.
+
+```tsx
+import { MitumbaText, Surface } from '@mitumba/mobile-ui'
+
+export function ListingCard() {
+  return (
+    <Surface elevation="raised" radius="large">
+      <MitumbaText variant="title" weight="semibold">
+        Vintage denim jacket
+      </MitumbaText>
+    </Surface>
+  )
+}
+```
+
+| Prop        | Values                                       | Default       |
+| ----------- | -------------------------------------------- | ------------- |
+| `tone`      | `default`, `subtle`, `strong`                | `default`     |
+| `elevation` | `flat`, `raised`, `overlay`                  | `flat`        |
+| `radius`    | `none`, `small`, `medium`, `large`, `pill`   | `medium`      |
+| `padding`   | `none`, `compact`, `comfortable`, `spacious` | `comfortable` |
+| `bordered`  | `boolean`                                    | `false`       |
+| `clip`      | `boolean`                                    | `false`       |
+
+### Tone and text pairing
+
+`default` uses the surface colour, `subtle` uses the page background for an area recessed **inside** another surface, and `strong` uses the dark brand green. No tone sets a text colour, so pair `strong` with `MitumbaText` tone `inverse`; white on that green is 5.3:1.
+
+### What actually carries the hierarchy
+
+Spacing and typography, not depth and not the border. Measured against the page background, `strong` is 4.9:1, `default` is 1.07:1, and `subtle` is 1.00:1; `bordered` adds roughly 1.4:1 on `default`, 1.1:1 on `subtle`, and nothing at all on `strong`, where the border colour equals the background. So `strong` is the only tone with an edge a low-vision user can find, and `bordered` is decoration.
+
+Group content with padding, gaps, and a heading. Use a surface for grouping and emphasis, never as the only signal that separate things are separate. A flat `subtle` surface placed directly on the page background is invisible by design — nest it inside a `default` surface, which is what "recessed" means here.
+
+### Clipping
+
+`clip` exists because `overflow: 'hidden'` removes the iOS shadow of the view that clips. When `clip` is set, `Surface` renders an inner clipping view and keeps the depth on the outer one, so a rounded image or a coloured bleed can sit flush inside an elevated surface without losing the shadow on either platform. The outer view keeps the tone background because Android composites elevation from the background, so an elevated transparent view would draw nothing.
+
+The inner view grows and shrinks, so a constrained surface such as `style={{ height: 220 }}` still lets a `flex: 1` child fill it and still contains taller content.
+
+### Composition rules
+
+- Consumer `style` is applied last on the outermost view, so the surface's own margin, width, and flex participation behave normally.
+- Under `clip`, that outer view is not the children's flex parent. `gap`, `flexDirection`, `alignItems`, and `flexWrap` passed through `style` arrange the inner wrapper rather than the children; `justifyContent` does nothing at all, because the wrapper already fills the main axis; and a `padding`, `borderWidth`, or `borderRadius` override composes with the inner values instead of replacing them. Wrap the children in your own `View` when you need to arrange them inside a clipped surface.
+- A clipped surface with a constrained height truncates content that outgrows it rather than overflowing, which is the point of clipping but also means long text can be cut at large font scales. Leave the height unconstrained when the content must always be readable.
+- Do not nest `raised` inside `raised`. Promote the outer surface to `overlay`, or separate the inner one with `tone="subtle"` and spacing.
+- A clipped surface clips its descendants' shadows. Do not place a `raised` or `overlay` surface inside a `clip` surface; give the inner one a tone and a border instead.
+- `Surface` is presentational and stateless. Loading, empty, error, and offline presentation belong to the components that compose it.
+- Every treatment is a static style object, so repeated use in long lists adds no per-render style resolution; `clip` adds exactly one view. The component is not memoised, so it re-renders with its parent like any other view.
 
 ## Elevation
 
