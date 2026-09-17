@@ -36,7 +36,7 @@ Status:
 
 Other: `needs-changeset`, `dependency-review`, `testing-approved`, `human-required`.
 
-`human-required` marks a genuine escalation only. It is not a routine review, merge, or release gate. Remove it once the escalation it names is resolved, and record what resolved it in the issue. Issues still carrying it from the earlier process keep it until their own escalation is genuinely settled.
+`human-required` marks a genuine escalation only. It is not a routine review, merge, or release gate. Remove it once the escalation it names is resolved, and record what resolved it in the issue. Where an older issue carries it with no escalation identified — no condition from the list below and no recorded decision request — it is a leftover of the retired process: remove it and say so in the issue.
 
 `agent:eligible` and `agent:claimed` are retired. Readiness is expressed by `status:ready` and ownership by `status:in-progress`, so neither label is required on new work; existing occurrences are inert.
 
@@ -113,7 +113,7 @@ Apply `human-required`, preserve evidence, and stop when one of these is concret
 - adding custom native Swift, Kotlin, Objective-C, or Java code;
 - adding a materially impactful production or native dependency that no accepted issue authorizes;
 - changing authentication, payments, secrets, privacy, legal, licensing, or publication ownership;
-- changing the operator's own standing authority, the capability grants in `.kiro/agents/*.md`, or this escalation list — the operator does not widen its own permissions or shorten its own stop list as routine work;
+- changing the operator's own standing authority, the capability grants in `.kiro/agents/*.md`, merge or publication ownership, or this escalation list — the operator does not widen its own permissions or shorten its own stop list as routine work. Cite where the maintainer asked for the change: the issue that requests it, or the instruction quoted in the pull request body. An operator-authored comment is not that evidence;
 - requiring paid infrastructure, unavailable credentials, or new organization permissions;
 - contradictory requirements that the accepted sources cannot resolve;
 - moving scope beyond the accepted capability budget;
@@ -139,4 +139,5 @@ Consequences of that retirement:
 
 - The protocol's permanent tags remain in the repository as historical evidence and carry no current authority.
 - The `0.2.0` slice hold is now the rule in this document plus `docs/ROADMAP.md`, not a tracker comment. Where tracker #5 or a release tracker body still requires a separate human instruction naming a reviewed pull request and exact head SHA before a merge or release, that clause is superseded: the operator decides merge and release timing under this document. Every other tracker commitment — scope, budget, dependency order, deferrals, and publication verification — still stands.
-- Legacy `agent:eligible`, `agent:claimed`, and unresolved `human-required` labels on older issues are inert artifacts of the earlier process, not current gates.
+- Legacy `agent:eligible` and `agent:claimed` labels are inert artifacts of the earlier process. A legacy `human-required` label that names no concrete escalation is likewise inert and should be removed as described above; one that does name a real unresolved condition still stands.
+- Where a tracker requires an artifact type this document no longer defines, read it as satisfied by the equivalent lean step: a recorded decision in the issue, an independent review of the exact head, or the release audit in `docs/RELEASING.md`.
