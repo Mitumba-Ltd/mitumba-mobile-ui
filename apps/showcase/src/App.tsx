@@ -215,9 +215,14 @@ export function App() {
             </Surface>
 
             <Surface bordered clip padding="none" radius="small">
+              <View style={styles.surfaceBleed}>
+                <MitumbaText tone="inverse" variant="caption" weight="bold">
+                  BORDERED AND CLIPPED
+                </MitumbaText>
+              </View>
               <View style={styles.surfaceBleedBody}>
                 <MitumbaText tone="secondary" variant="caption">
-                  Bordered and clipped: the border moves to the inner clipping view.
+                  The bleed reaches the clipped corner and the border sits on the same inner view.
                 </MitumbaText>
               </View>
             </Surface>
@@ -232,8 +237,7 @@ export function App() {
             </Surface>
 
             <Surface
-              accessibilityLabel="Order summary: two items, ready to ship"
-              accessibilityRole="summary"
+              accessibilityLabel="Accessibility grouping. A screen reader announces this surface as one element because the caller asked for it."
               accessible
               bordered
             >
@@ -244,18 +248,29 @@ export function App() {
               </MitumbaText>
             </Surface>
 
+            <Surface bordered clip elevation="raised" padding="none" style={styles.surfaceFixed}>
+              <View style={styles.surfaceFill}>
+                <MitumbaText tone="inverse" variant="caption" weight="bold">
+                  CONSTRAINED AND FILLED
+                </MitumbaText>
+                <MitumbaText tone="inverse" variant="caption">
+                  The clipping view grows to the fixed height, so this block fills it.
+                </MitumbaText>
+              </View>
+            </Surface>
+
             <Surface elevation="raised" padding="spacious">
               <MitumbaText variant="title" weight="semibold">
                 Long content at large font scale
               </MitumbaText>
               <MitumbaText>
-                Padding, radius, and depth are fixed values rather than ratios, so raising the
-                system font size reflows this copy inside the surface instead of clipping it. The
-                surface grows with the text, and nothing here depends on a fixed height or on
-                truncating the sentence to fit.
+                Padding, radius, and depth are fixed values rather than ratios, so the frame does
+                not scale with the text. That is the deliberate trade-off: the copy reflows and the
+                surface grows to contain it, and nothing here truncates the sentence to fit.
               </MitumbaText>
               <MitumbaText tone="secondary" variant="caption">
-                Increase the device font size to check the reflow.
+                Nothing constrains the height, so the surface grows with the text. Increase the
+                device font size to check the reflow.
               </MitumbaText>
             </Surface>
           </ShowcaseSection>
@@ -334,6 +349,17 @@ const styles = StyleSheet.create({
   },
   policyCard: {
     gap: mobileTheme.spacing.sm,
+  },
+  surfaceFixed: {
+    height: 132,
+  },
+  surfaceFill: {
+    flex: 1,
+    gap: mobileTheme.spacing.xs,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: mobileTheme.semanticColors.text.brand,
+    padding: mobileTheme.spacing.lg,
   },
   surfaceBleed: {
     alignItems: 'center',
