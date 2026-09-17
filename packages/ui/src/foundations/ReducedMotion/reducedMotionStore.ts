@@ -23,6 +23,9 @@ let snapshot = SAFE_FALLBACK
 const getSnapshot = (): boolean => snapshot
 const getSafeFallback = (): boolean => SAFE_FALLBACK
 
+const normalize = (reduceMotionEnabled: boolean): boolean =>
+  typeof reduceMotionEnabled === 'boolean' ? reduceMotionEnabled : SAFE_FALLBACK
+
 const updateSnapshot = (nextSnapshot: boolean): void => {
   if (snapshot === nextSnapshot) {
     return
@@ -48,7 +51,7 @@ const startObserving = (): void => {
     }
 
     eventRevision += 1
-    updateSnapshot(reduceMotionEnabled)
+    updateSnapshot(normalize(reduceMotionEnabled))
   }
 
   nativeSubscription = undefined
@@ -78,7 +81,7 @@ const startObserving = (): void => {
   void preferenceQuery.then(
     (reduceMotionEnabled) => {
       if (isCurrentObservation(generation) && eventRevision === queryRevision) {
-        updateSnapshot(reduceMotionEnabled)
+        updateSnapshot(normalize(reduceMotionEnabled))
       }
     },
     () => {
