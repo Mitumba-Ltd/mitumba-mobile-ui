@@ -86,8 +86,8 @@ body:
         - [ ] Viable alternatives, consequences, and deferrals are compared.
         - [ ] The strongest bounded option is selected through a truthful autonomous decision record, or the issue stops at one named genuine escalation.
         - [ ] The decision record identifies actor type and states the evidence behind the choice.
-        - [ ] One immutable plan predeclares exact outputs, operations, expected states, and receipt refs before mutation.
-        - [ ] Only the closed issue-create, milestone-create, and issue-comment-append operations execute. Normal and recovery execution use the same plan-derived endpoint/scope/resolved request, plan-request/wire hashes, operation ID, fixed attempt/outcome, and declared receipt; an issue milestone is resolved only from the uniquely named earlier validated milestone receipt, and no generic issue creation, milestone mutation, or stale tracker-body replacement exists.
+        - [ ] The issues, milestones, and tracker updates this design will create are listed before any of them is created.
+        - [ ] A tracker body is amended rather than replaced from a stale read, so no earlier entry is lost.
         - [ ] One `status:needs-brief` issue is created per selected component or concern.
         - [ ] The governing tracker checklist and tracker #5 capture every generated child, root, and deferral.
         - [ ] Every new issue starts at `status:needs-brief` until its own contract is complete.
