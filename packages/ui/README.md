@@ -52,6 +52,7 @@ console.log(mobileTheme.colors.green)
 - `MitumbaButton` provides accessible action variants, loading state, and native touch feedback.
 - `useReducedMotion` exposes the effective native reduced-motion policy.
 - `ReducedMotionProvider` supplies a deterministic policy to one controlled subtree.
+- `elevation` maps semantic depth levels to native Android and iOS surface styles.
 
 Only exports from the package root are public API. Imports into `src/` or `lib/` are unsupported.
 
@@ -120,6 +121,55 @@ The provider-plus-hook design is the narrowest contract that supports reusable n
 - An internal-only policy was rejected because both effective states could not be rendered deterministically through the public package boundary.
 
 The provider owns only a scoped fixed value; the hook remains the one API components consume. Store, context, subscription, query ordering, and race handling stay private implementation details.
+
+## Elevation
+
+`elevation` is a static record of semantic depth levels resolved for the running platform. It is public because consumers compose their own surfaces, and its output is a plain style object that can be spread into any `View`.
+
+```tsx
+import { View } from 'react-native'
+import { elevation, mobileTheme } from '@mitumba/mobile-ui'
+
+export function ListingCardSurface({ children }: { children: React.ReactNode }) {
+  return (
+    <View
+      style={[
+        {
+          backgroundColor: mobileTheme.colors.surface,
+          borderRadius: mobileTheme.radius.lg,
+          padding: mobileTheme.spacing.lg,
+        },
+        elevation.raised,
+      ]}
+    >
+      {children}
+    </View>
+  )
+}
+```
+
+### Levels
+
+| Level     | Meaning                                             | Android        | iOS                                       |
+| --------- | --------------------------------------------------- | -------------- | ----------------------------------------- |
+| `flat`    | In-page content with no separation shadow           | `elevation: 0` | zero-opacity shadow                       |
+| `raised`  | Card or tile sitting above the page background      | `elevation: 2` | offset `0,1`, radius `3`, opacity `0.10`  |
+| `overlay` | Sheet, menu, or dialog temporarily covering content | `elevation: 8` | offset `0,4`, radius `12`, opacity `0.16` |
+
+Three levels are deliberate. Surfaces, cards, and overlays are the only depth distinctions the current roadmap needs, so a longer decorative scale would invite inconsistent usage without a real requirement.
+
+### Rules
+
+- **Depth is never the only signal.** Pair a level with background colour, a hairline border, spacing, or heading semantics. When shadows are unrendered, disabled by the platform, or invisible against a dark surface, hierarchy must still read.
+- **Clipping surfaces need two views.** `overflow: 'hidden'` removes the iOS shadow of the clipping view, so apply the level to an outer view and clip inside it. Android `elevation` is unaffected, so a single-view surface would silently diverge between platforms.
+- **Radius belongs to the surface, not the level.** Levels set no `borderRadius`; iOS derives the shadow shape from the view, so set radius and background on the same view that carries the level.
+- **Nesting stays restrained.** Do not stack `raised` inside `raised`; promote the outer surface or separate the inner one with background and border instead.
+- **Dark surfaces need contrast, not more shadow.** Increase surface contrast rather than opacity, because a near-black shadow is invisible on a dark background.
+- **Platform parity is semantic, not pixel-perfect.** Android composites a real elevation shadow while iOS draws an offset blur; the levels are documented separately instead of forcing identical output.
+
+### Tokens and performance
+
+`@mitumba/tokens` exposes `shadows` as CSS `box-shadow` strings. Those are web-only values and are never copied or parsed into native code; the levels above are native replacements that preserve the same restrained intent, and only the token colour palette is reused for the shadow colour. Each level is a single static object created once at module load, so list-heavy screens reuse the same style reference and add no per-render work. Prefer a static level over animating shadow properties on low-end Android, where elevation changes force expensive re-compositing.
 
 ## Scope
 
