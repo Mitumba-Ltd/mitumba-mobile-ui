@@ -160,8 +160,10 @@ Three levels are deliberate. Surfaces, cards, and overlays are the only depth di
 
 ### Rules
 
-- **Depth is never the only signal.** Pair a level with background colour, a hairline border, spacing, or heading semantics. When shadows are unrendered, disabled by the platform, or invisible against a dark surface, hierarchy must still read.
-- **Clipping surfaces need two views.** `overflow: 'hidden'` removes the iOS shadow of the clipping view, so apply the level to an outer view and clip inside it. Android `elevation` is unaffected, so a single-view surface would silently diverge between platforms.
+- **Depth is never the only signal.** Spacing, grouping, and heading semantics must carry the hierarchy on their own. A hairline `border` on `surface` is roughly 1.4:1 and therefore decoration, not a boundary a low-vision user can rely on; when a surface genuinely needs a visible edge, give it a contrast-bearing colour rather than assuming the shadow or the hairline will read.
+- **Android needs an opaque background to draw any shadow.** Android composites elevation from the view's background, so `elevation` on a transparent view renders nothing. Background is a rendering precondition there, not only hierarchy insurance.
+- **Android elevation also reorders overlapping siblings.** React Native's `elevation` affects z-order as well as shadow, so a `raised` view can draw above a later sibling on Android while the same style reorders nothing on iOS. Use explicit `zIndex` when stacking order matters.
+- **Clipping surfaces need two views.** `overflow: 'hidden'` removes the iOS shadow of the clipping view, so apply the level to an outer view and clip inside it. Android `elevation` is unaffected, so a single-view surface would silently diverge between platforms. A clipping _ancestor_ also cuts a descendant's shadow on both platforms, so an elevated surface must not sit inside a rounded clipping container.
 - **Radius belongs to the surface, not the level.** Levels set no `borderRadius`; iOS derives the shadow shape from the view, so set radius and background on the same view that carries the level.
 - **Nesting stays restrained.** Do not stack `raised` inside `raised`; promote the outer surface or separate the inner one with background and border instead.
 - **Dark surfaces need contrast, not more shadow.** Increase surface contrast rather than opacity, because a near-black shadow is invisible on a dark background.
@@ -169,7 +171,7 @@ Three levels are deliberate. Surfaces, cards, and overlays are the only depth di
 
 ### Tokens and performance
 
-`@mitumba/tokens` exposes `shadows` as CSS `box-shadow` strings. Those are web-only values and are never copied or parsed into native code; the levels above are native replacements that preserve the same restrained intent, and only the token colour palette is reused for the shadow colour. Each level is a single static object created once at module load, so list-heavy screens reuse the same style reference and add no per-render work. Prefer a static level over animating shadow properties on low-end Android, where elevation changes force expensive re-compositing.
+`@mitumba/tokens` exposes `shadows` as CSS `box-shadow` strings. Those are web-only values and are never copied or parsed into native code; the levels above are native replacements that preserve the same restrained intent. The only token reuse is the near-black text colour, applied as the iOS `shadowColor`; Android leaves the shadow tint to the platform, so that reuse is iOS-only. Each level is a single static object created once at module load, so list-heavy screens reuse the same style reference and add no per-render work. Prefer a static level over animating shadow properties on low-end Android, where elevation changes force expensive re-compositing.
 
 ## Scope
 
