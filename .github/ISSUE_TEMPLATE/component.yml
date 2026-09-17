@@ -8,7 +8,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Use this form for exactly one public component. Complete the contract before adding `status:ready` and `agent:eligible`.
+        Use this form for exactly one public component. Complete the contract before moving it to `status:ready`.
 
   - type: input
     id: slice
