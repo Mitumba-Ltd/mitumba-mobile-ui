@@ -91,7 +91,6 @@ body:
         - [ ] One `status:needs-brief` issue is created per selected component or concern.
         - [ ] The governing tracker checklist and tracker #5 capture every generated child, root, and deferral.
         - [ ] Every new issue starts at `status:needs-brief` until its own contract is complete.
-        - [ ] Created issues and milestones are checked afresh so none is duplicated.
         - [ ] If the design is interrupted partway, the next session can tell from GitHub alone which issues and milestones already exist and resume without duplicating them.
         - [ ] The design issue closes as completed once its choice and resulting issues are recorded.
         - [ ] No package implementation begins solely from this decision issue.
