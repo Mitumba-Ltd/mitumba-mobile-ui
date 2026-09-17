@@ -45,7 +45,7 @@ function ReducedMotionStatus({ description, label }: ReducedMotionStatusProps) {
   const reduceMotion = useReducedMotion()
 
   return (
-    <View style={styles.policyCard}>
+    <Surface bordered style={styles.policyCard}>
       <MitumbaText weight="semibold">{label}</MitumbaText>
       <MitumbaText
         accessibilityLiveRegion="polite"
@@ -57,7 +57,7 @@ function ReducedMotionStatus({ description, label }: ReducedMotionStatusProps) {
       <MitumbaText tone="secondary" variant="caption">
         {description}
       </MitumbaText>
-    </View>
+    </Surface>
   )
 }
 
@@ -169,11 +169,13 @@ export function App() {
               </MitumbaText>
             </Surface>
 
-            <Surface tone="subtle" bordered>
-              <MitumbaText weight="semibold">Subtle and bordered</MitumbaText>
-              <MitumbaText tone="secondary" variant="caption">
-                Recessed background with a hairline edge.
-              </MitumbaText>
+            <Surface>
+              <MitumbaText weight="semibold">Subtle, recessed inside a surface</MitumbaText>
+              <Surface bordered padding="compact" radius="small" tone="subtle">
+                <MitumbaText tone="secondary" variant="caption">
+                  Subtle only reads inside another surface, never on the page background.
+                </MitumbaText>
+              </Surface>
             </Surface>
 
             <Surface tone="strong" radius="large" padding="spacious">
@@ -181,7 +183,7 @@ export function App() {
                 Strong tone
               </MitumbaText>
               <MitumbaText tone="inverse" variant="caption">
-                Paired with inverse text at 4.9:1.
+                Paired with inverse text at 5.3:1. The only tone with a findable edge.
               </MitumbaText>
             </Surface>
 
@@ -212,6 +214,14 @@ export function App() {
               </View>
             </Surface>
 
+            <Surface bordered clip padding="none" radius="small">
+              <View style={styles.surfaceBleedBody}>
+                <MitumbaText tone="secondary" variant="caption">
+                  Bordered and clipped: the border moves to the inner clipping view.
+                </MitumbaText>
+              </View>
+            </Surface>
+
             <Surface tone="subtle" padding="compact">
               <MitumbaText weight="semibold">Nested surfaces</MitumbaText>
               <Surface bordered padding="compact" radius="small">
@@ -219,6 +229,34 @@ export function App() {
                   Separated by tone and border rather than stacked depth.
                 </MitumbaText>
               </Surface>
+            </Surface>
+
+            <Surface
+              accessibilityLabel="Order summary: two items, ready to ship"
+              accessibilityRole="summary"
+              accessible
+              bordered
+            >
+              <MitumbaText weight="semibold">Accessibility grouping</MitumbaText>
+              <MitumbaText tone="secondary" variant="caption">
+                A screen reader announces this surface as one element because the caller asked for
+                it. Surface adds no role of its own.
+              </MitumbaText>
+            </Surface>
+
+            <Surface elevation="raised" padding="spacious">
+              <MitumbaText variant="title" weight="semibold">
+                Long content at large font scale
+              </MitumbaText>
+              <MitumbaText>
+                Padding, radius, and depth are fixed values rather than ratios, so raising the
+                system font size reflows this copy inside the surface instead of clipping it. The
+                surface grows with the text, and nothing here depends on a fixed height or on
+                truncating the sentence to fit.
+              </MitumbaText>
+              <MitumbaText tone="secondary" variant="caption">
+                Increase the device font size to check the reflow.
+              </MitumbaText>
             </Surface>
           </ShowcaseSection>
 
@@ -296,11 +334,6 @@ const styles = StyleSheet.create({
   },
   policyCard: {
     gap: mobileTheme.spacing.sm,
-    backgroundColor: mobileTheme.colors.surface,
-    borderColor: mobileTheme.semanticColors.actions.secondary.border,
-    borderRadius: mobileTheme.radius.lg,
-    borderWidth: StyleSheet.hairlineWidth,
-    padding: mobileTheme.spacing.lg,
   },
   surfaceBleed: {
     alignItems: 'center',
