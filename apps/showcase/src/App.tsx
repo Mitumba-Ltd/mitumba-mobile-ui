@@ -7,9 +7,17 @@ import {
   MitumbaButton,
   MitumbaText,
   ReducedMotionProvider,
+  elevation,
   mobileTheme,
   useReducedMotion,
+  type ElevationLevel,
 } from '@mitumba/mobile-ui'
+
+const elevationDescriptions: Record<ElevationLevel, string> = {
+  flat: 'In-page content with no separation shadow.',
+  raised: 'Cards and tiles above the page background.',
+  overlay: 'Sheets and menus covering content.',
+}
 
 interface ShowcaseSectionProps {
   title: string
@@ -147,6 +155,23 @@ export function App() {
             </View>
           </ShowcaseSection>
 
+          <ShowcaseSection title="Elevation">
+            <MitumbaText tone="secondary">
+              Semantic depth levels resolved for this platform. Every level keeps a background and
+              border so hierarchy survives when the shadow is not rendered.
+            </MitumbaText>
+            <View style={styles.elevationGrid}>
+              {(['flat', 'raised', 'overlay'] as const).map((level) => (
+                <View key={level} style={[styles.elevationCard, elevation[level]]}>
+                  <MitumbaText weight="semibold">{level}</MitumbaText>
+                  <MitumbaText tone="secondary" variant="caption">
+                    {elevationDescriptions[level]}
+                  </MitumbaText>
+                </View>
+              ))}
+            </View>
+          </ShowcaseSection>
+
           <ShowcaseSection title="Semantic color">
             <View style={styles.colorGrid}>
               <View style={[styles.swatch, styles.brandSwatch]}>
@@ -206,6 +231,21 @@ const styles = StyleSheet.create({
     gap: mobileTheme.spacing.sm,
     backgroundColor: mobileTheme.colors.surface,
     borderColor: mobileTheme.semanticColors.actions.secondary.border,
+    borderRadius: mobileTheme.radius.lg,
+    borderWidth: StyleSheet.hairlineWidth,
+    padding: mobileTheme.spacing.lg,
+  },
+  elevationGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: mobileTheme.spacing.lg,
+  },
+  elevationCard: {
+    minWidth: 148,
+    flexGrow: 1,
+    gap: mobileTheme.spacing.sm,
+    backgroundColor: mobileTheme.colors.surface,
+    borderColor: mobileTheme.colors.border,
     borderRadius: mobileTheme.radius.lg,
     borderWidth: StyleSheet.hairlineWidth,
     padding: mobileTheme.spacing.lg,
