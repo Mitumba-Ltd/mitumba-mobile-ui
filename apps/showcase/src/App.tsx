@@ -3,11 +3,22 @@ import { ScrollView, StyleSheet, View } from 'react-native'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import { StatusBar } from 'expo-status-bar'
 
-import { MitumbaButton, MitumbaText, mobileTheme } from '@mitumba/mobile-ui'
+import {
+  MitumbaButton,
+  MitumbaText,
+  ReducedMotionProvider,
+  mobileTheme,
+  useReducedMotion,
+} from '@mitumba/mobile-ui'
 
 interface ShowcaseSectionProps {
   title: string
   children: ReactNode
+}
+
+interface ReducedMotionStatusProps {
+  description: string
+  label: string
 }
 
 function ShowcaseSection({ title, children }: ShowcaseSectionProps) {
@@ -17,6 +28,26 @@ function ShowcaseSection({ title, children }: ShowcaseSectionProps) {
         {title}
       </MitumbaText>
       <View style={styles.sectionContent}>{children}</View>
+    </View>
+  )
+}
+
+function ReducedMotionStatus({ description, label }: ReducedMotionStatusProps) {
+  const reduceMotion = useReducedMotion()
+
+  return (
+    <View style={styles.policyCard}>
+      <MitumbaText weight="semibold">{label}</MitumbaText>
+      <MitumbaText
+        accessibilityLiveRegion="polite"
+        tone={reduceMotion ? 'warning' : 'success'}
+        weight="bold"
+      >
+        {reduceMotion ? 'Reduced motion' : 'Motion enabled'}
+      </MitumbaText>
+      <MitumbaText tone="secondary" variant="caption">
+        {description}
+      </MitumbaText>
     </View>
   )
 }
@@ -91,6 +122,31 @@ export function App() {
             </MitumbaText>
           </ShowcaseSection>
 
+          <ShowcaseSection title="Reduced motion">
+            <MitumbaText tone="secondary">
+              The live card follows the device. Deterministic cards exercise both public override
+              states without a showcase-owned platform listener.
+            </MitumbaText>
+            <View style={styles.policyGrid}>
+              <ReducedMotionStatus
+                description="Updates when the operating-system accessibility preference changes."
+                label="Live system policy"
+              />
+              <ReducedMotionProvider value>
+                <ReducedMotionStatus
+                  description="Static fallback state for reduced-motion component evidence."
+                  label="Forced reduced"
+                />
+              </ReducedMotionProvider>
+              <ReducedMotionProvider value={false}>
+                <ReducedMotionStatus
+                  description="Controlled preview only; never bypass a user preference in production."
+                  label="Forced motion enabled"
+                />
+              </ReducedMotionProvider>
+            </View>
+          </ShowcaseSection>
+
           <ShowcaseSection title="Semantic color">
             <View style={styles.colorGrid}>
               <View style={[styles.swatch, styles.brandSwatch]}>
@@ -142,6 +198,17 @@ const styles = StyleSheet.create({
   },
   sectionContent: {
     gap: mobileTheme.spacing.base,
+  },
+  policyGrid: {
+    gap: mobileTheme.spacing.base,
+  },
+  policyCard: {
+    gap: mobileTheme.spacing.sm,
+    backgroundColor: mobileTheme.colors.surface,
+    borderColor: mobileTheme.semanticColors.actions.secondary.border,
+    borderRadius: mobileTheme.radius.lg,
+    borderWidth: StyleSheet.hairlineWidth,
+    padding: mobileTheme.spacing.lg,
   },
   colorGrid: {
     flexDirection: 'row',
