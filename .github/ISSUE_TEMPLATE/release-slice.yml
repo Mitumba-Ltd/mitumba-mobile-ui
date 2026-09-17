@@ -53,10 +53,7 @@ body:
     attributes:
       label: Exact-candidate release audit
       placeholder: |
-        - [ ] Tracker #5 fingerprint/program-map/recovery state and the unique active-policy chain are current; no pending successor cutover, unresolved/current/competing/unsuppressed/malformed recovery start, conflicting resolution, unsuppressed aborted subject, currently qualified resolution, malformed/forked lineage, or unsuperseded stale/expired generation passes the canonical gate. A pending successor is enumerable only under `preSelectionPolicyQuiescence` with absent current mutex/start and blocker-free visible terminal history (every prior start completed or its abort uniquely suppressed by a later authority/lineage/spend/subject-equal resolution-bound completion); a selected one requires exact-bound `selectedPolicyTransitionQuiescence` retaining that byte-identical history and rejecting changes/new starts until an all-or-nothing terminal `policy-transition-completed` cutover, and never returns to release enumeration.
-        - [ ] Any authority-bound record uses exactly one canonical disjoint variant whose exact statement bytes and atomically consumed one-use ref validate; ordinary comments or API `User`/null-App/permission observations are not durable human provenance, and session-direct success completes in its receiving runtime.
-        - [ ] This tracker fingerprint and canonical checklist hash match its policy-scoped `root-activation:v2` under the unique active policy SHA.
-        - [ ] Every canonical issue fingerprint and dependency is current; implementation PRs are independently reviewed and normally merged, and every canonical decision issue passes `validateDecisionClosure` through one canonical `decision-closure-result:v1` or the sole exact issue #16 adapter.
+        - [ ] Every child issue is closed by an independently reviewed, normally merged PR, and every decision issue records its choice and alternatives.
         - [ ] The slice remains one coherent capability within budget.
         - [ ] Every public change has a correct Changeset and the generated SemVer/changelog is expected.
         - [ ] Public exports, declarations, docs, licenses, packed files, and showcase states were inspected.
@@ -64,8 +61,8 @@ body:
         - [ ] `npm run verify:package` passes at the candidate SHA.
         - [ ] `npx expo install --check` passes from `apps/showcase`.
         - [ ] Required feature, main, CI, and Publish-preparation workflows are green or a zero-job automation event is explicitly reconciled.
-        - [ ] The generated release PR's exact head/current base/non-null tested merge commit/tree, current exact-base guard, and canonical bundle manifest/artifact bytes have outer verification plus a passing byte-complete independent `semantic-review:v1` verdict.
-        - [ ] The release-audit record binds expected version/dist-tag, PR head, reviewed base, tested integration, exact-base guard, canonical bundle hash/artifacts, finite validation evidence, fingerprints/hashes, findings, and semantic assessment.
+        - [ ] The generated release PR's exact head has an independent review, and its diff is only the mechanical version, changelog, and consumed-Changeset result.
+        - [ ] The audit record notes the expected version and dist-tag, the exact head, the reviewer, the findings and resolutions, and the residual risks.
     validations:
       required: true
 
@@ -73,7 +70,7 @@ body:
     id: publication
     attributes:
       label: OIDC publication and verification record
-      description: Complete after the exact audited release head normally merges under the standing policy and the resulting Publish run reaches a terminal conclusion.
+      description: Complete after the audited release head is merged and the resulting Publish run reaches a terminal conclusion.
       placeholder: |
         Success:
         - [ ] Record release PR/head/merge commit and source commit.
@@ -84,7 +81,7 @@ body:
         Failure:
         - [ ] Record exact logs and observed registry/provenance state; apply `status:blocked`.
         - [ ] Open one bounded repair issue when a uniquely safe repository fix exists.
-        - [ ] Add `human-required` only for a canonical genuine escalation.
+        - [ ] Add `human-required` only for a genuine escalation.
     validations:
       required: true
 
@@ -93,13 +90,13 @@ body:
     attributes:
       label: Release safeguards
       options:
-        - label: The tracker cannot enter `status:in-progress` until a truthful activation record binds its title, body, milestone fingerprint, and canonical checklist hash.
+        - label: The tracker lists its child issues and links the decisions that shaped it before it enters `status:in-progress`.
           required: true
         - label: The generated Changesets PR remains unmerged until every exact-candidate audit gate above passes.
           required: true
-        - label: Merge uses the reviewed exact head/base/non-null tested integration only while strict required-status-check protection gives a non-bypassable server exact-base guard and no successor-policy cutover is pending; exactly one fixed dedicated outcome can claim the request. Authenticated rejection records the exact positive status and response-body-byte hash (including deterministic empty body); a live winner that proves HTTP was never initiated records only `pre-send-not-sent`, while positively authenticated termination of the original direct-authority runtime records only expiry indeterminacy, including for an open or visibly merged protected PR. Rejected/not-sent/indeterminate outcomes create no result, permit no retry or later success adoption under that identity, and any head, base, tested-integration, guard, or bundle change requires fresh validation and semantic review.
+        - label: Merge uses a normal merge commit and the expected head SHA, only while that reviewed head is still green, conflict-free, and current. Any new commit requires fresh validation and a fresh review.
           required: true
         - label: GitHub Actions alone publishes through OIDC; local/manual publication, token fallback, and generated-version edits are prohibited.
           required: true
-        - label: Routine readiness, merge, OIDC monitoring, and deterministic repair do not add `human-required`.
+        - label: Routine readiness, merge, publication monitoring, and bounded repair do not add `human-required`.
           required: true

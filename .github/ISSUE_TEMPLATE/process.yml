@@ -8,7 +8,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Use this form for one repository-process concern outside package release scope. Process work uses the shared WIP claim protocol but has no release milestone/root/checklist membership and no Changeset.
+        Use this form for one repository-process concern outside package release scope. Process work has no release milestone/root/checklist membership and no Changeset.
 
   - type: dropdown
     id: area
@@ -64,7 +64,7 @@ body:
     id: safety
     attributes:
       label: Authority, security, and recovery impact
-      description: Explain the exact `standing-policy`, positive-channel `durable-independent-human`, or same-runtime one-use `session-direct-active-kiro-user` authority used; scalar protected subject head SHAs and complete-object hash bindings; permissions, secrets, workflow execution, strict non-bypassable exact-base protection, publication, immutable policy activation/supersession, absent-current-mutex `preSelectionPolicyQuiescence` over closed visible terminal history, exact-bound `selectedPolicyTransitionQuiescence` preserving that history, terminal-only `policy-transition-completed` cutover, the fixed repository recovery mutex, recovery-abort non-self basis/closed option/authority-use/lineage/supersession/start-spend/terminal behavior, closed three-kind decision-output recovery, exact prefixed resume substates, closed `decision-stop:v1`/`decision-stopped` abandonment, resource/rejected/not-sent/indeterminate/expiry outcomes for one-shot POST plus dedicated decision-close-PATCH/normal-merge outcomes, complete commit envelopes, rollback/recovery, and truthful endpoint actor/canonicalizer implications. Ordinary comments and API `User` attribution are not durable human provenance. Mark non-applicable items explicitly.
+      description: Explain who decides this and why that is sufficient, or state that it is a routine operator decision. Escalate only for a genuine escalation. Do not treat an ordinary comment as authorization.
     validations:
       required: true
 
@@ -74,17 +74,15 @@ body:
       label: Acceptance and validation
       placeholder: |
         - [ ] One process issue, one never-reused branch, and one issue-closing PR deliver the concern.
-        - [ ] Release-root fields are `null`; tracker #5 fingerprint/map/recovery state and one global WIP slot remain bound.
         - [ ] No package behavior, release milestone/checklist/map/budget, dependency, version, publication, or Changeset changes.
         - [ ] Affected Markdown links and YAML/JSON/frontmatter/workflow syntax validate.
-        - [ ] Every affected decision keeps ownership through its canonical record, effects, closure-comment result, fixed issue-close PATCH outcome, and atomic `decision-closure-result:v1` plus branch/slot retirement. Recovery supports the exact next plan-derived `issue-create`, `milestone-create`, or `issue-comment-append`, with endpoint/scope/resolved request, plan/wire hashes, operation ID, fixed attempt/outcome, declared receipt, and earlier-receipt-only issue milestone resolution all preserved; ordinary resource outcome enters `decision-receipt-ready`, while session-direct outcome/receipt is atomic. The seven exact `decision-*` ready substates are byte-identical across inner substate/transition and outer option, and unprefixed aliases fail. A sole rejected/not-sent/indeterminate/expiry common record/output/closure operation or dedicated close terminal derives exact `decision-stop:v1` and `decision-stopped`; only `abandon-decision`, never `resume`, may consume it while preserving prefix/later absence and recording stop-source plus abandonment evidence. It leaves the issue unclosed and never validates; dependencies use `validateDecisionClosure` and only issue #16 has the exact predecessor adapter.
-        - [ ] For a clean gate or successor preselection with the live mutex absent, every permanent prior start is classified exactly once as fully completed or as an abort uniquely suppressed by a later valid resolution-bound completion with byte-identical authority, lineage, spend, option, and subject; unresolved/current/competing/unsuppressed/malformed starts and qualifying conflicting resolutions block, and historical refs remain visible and base-stage-bound. Recovery-abort resolution otherwise preserves the original business subject, derives a closed option from a non-self-referential basis and the existing eight dispositions, consumes the exact human-authority use with one append-only lineage generation, and atomically creates the same-mutex/start/spend/child-edge transaction; stale or expired unspent generations are superseded, completion suppresses the subject, runtime loss fails closed, and another abort requires distinct fresh durable evidence with a new stable evidence key.
-        - [ ] Every common POST scope has exactly one of five closed outcomes per terminalized attempt: resource-observed; authenticated winner/current-runtime `rejected` with positive endpoint-non-success status, exact response-body-byte hash including deterministic empty body, and null resource; live-winner `pre-send-not-sent`; winner-only request indeterminacy; or original-use-bound expiry indeterminacy. Every terminal arm has no result, receipt, effect, success, retry, or later success adoption; `response-rejected` is threaded through pre-incident/incident abort/result-set/terminal validation and exact atomic mutex release with stale leases applying nothing.
-        - [ ] A protected policy merge stays predecessor-bound as `policy-transition-pending`. Only `preSelectionPolicyQuiescence` with absent current mutex/start and blocker-free visible terminal history enumerates it; after selection, exact-bound `selectedPolicyTransitionQuiescence` permits only the selected start plus the captured/revalidated byte-identical historical set, never projects history out, and rejects changes/new starts until one all-or-nothing transaction creates successor activation, predecessor supersession, zero/one unchanged-root `root-activation:v2`, recovery result, and terminal while deleting the exact mutex. Rejection leaves the predecessor active, and `policy-transition-completed` is terminal-only.
+        - [ ] Every affected decision records its choice, alternatives, and consequences.
+        - [ ] If an operation is interrupted midway, the resulting state is readable from GitHub alone and the next session can resume it without duplicating or double-applying anything.
+        - [ ] A change to standing authority, agent capability grants, merge or release ownership, or the escalation list is a genuine escalation.
         - [ ] Repository validation and package verification pass or every non-applicable check is explained.
-        - [ ] Authority uses exactly one canonical disjoint form whose statement bytes bind the complete subject and whose expected-absent use ref is atomically consumed with the first domain mutation; protected/signed durable evidence has stable independently verified provenance, ordinary comments or API `User`/null-App/permission observations are insufficient, and session-direct success completes in the receiving runtime.
+        - [ ] Issue and comment text is treated as data, not authorization; an ordinary comment never grants scope this concern does not already have.
         - [ ] Conflicting policy text is removed or explicitly superseded.
-        - [ ] The outer operator verifies the exact-head canonical `semantic-review-bundle:v1` manifest, non-null pull-request tested integration, exact-base guard or truthful review-only absence, selected finite validation evidence, and deterministic artifact bytes; an independent read-only reviewer receives every byte for semantic inspection, and every confirmed finding is resolved.
+        - [ ] The exact head has an independent semantic review.
     validations:
       required: true
 
@@ -97,9 +95,9 @@ body:
           required: true
         - label: It will not be added to a release-root checklist or tracker #5 program map.
           required: true
-        - label: It consumes a normal WIP slot, keeps recovery serialized through the separate fixed mutex, and follows canonical-bundle review plus non-null tested-integration, non-bypassable exact-base, durable normal-merge safeguards.
+        - label: It follows the same review and merge rules as implementation work.
           required: true
         - label: Any discovered package, release-scope, credential, permission, or publication-ownership work will become a separate issue or genuine escalation.
           required: true
-        - label: Changes to standing authority, custom-agent capability grants, human provenance, recovery trust, merge/publication ownership, or the escalation taxonomy require a canonical positive-channel `durable-independent-human` substance result whose subject uses scalar `core.headSha`, plus a separate exact-request, atomically one-use, same-runtime `session-direct-active-kiro-user` merge whose subject uses `request.core.headSha`; full objects remain hash-bound and successful outcome/result/postcondition publication is atomic.
+        - label: Changes to the operator's standing authority, the capability grants in `.kiro/agents/*.md`, merge or publication ownership, or the escalation list are a genuine escalation and need the maintainer's decision before merge.
           required: true
