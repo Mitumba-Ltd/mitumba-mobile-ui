@@ -1,5 +1,13 @@
 # @mitumba/mobile-ui
 
+## 0.2.0
+
+### Minor Changes
+
+- f62f537: Add a native reduced-motion policy with a shared system hook and deterministic scoped overrides.
+- c9879fc: Add a native elevation policy with three semantic levels mapped separately for Android and iOS.
+- 1108992: Add `Surface`, a non-interactive container with semantic tone, radius, spacing, border, and elevation.
+
 ## 0.1.0
 
 ### Minor Changes

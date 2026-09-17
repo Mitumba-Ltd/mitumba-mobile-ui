@@ -1,6 +1,6 @@
 {
   "name": "@mitumba/mobile-ui",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Mitumba's native design and interaction system for React Native and Expo.",
   "license": "MIT",
   "type": "module",
