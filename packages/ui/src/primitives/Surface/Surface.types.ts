@@ -20,7 +20,13 @@ export interface SurfaceProps extends ViewProps {
   radius?: SurfaceRadius
   /** Semantic inner spacing. */
   padding?: SurfacePadding
-  /** Adds a hairline border in the tone's border colour for extra separation. */
+  /**
+   * Adds a hairline border in the tone's border colour.
+   *
+   * This is decoration, not a hierarchy guarantee: the border is about 1.4:1 on
+   * `default`, 1.1:1 on `subtle`, and invisible on `strong`, where it matches
+   * the background. Let spacing and typography carry the grouping.
+   */
   bordered?: boolean
   /**
    * Clips children to the rounded shape.
