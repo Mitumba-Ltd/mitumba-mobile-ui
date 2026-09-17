@@ -8,23 +8,23 @@ Releases use Changesets and npm trusted publishing through GitHub Actions OIDC. 
 
 The one-time package reservation `0.0.0` remains deprecated under the `bootstrap` tag. The bootstrap is complete and must never be repeated.
 
-## Authority and release ownership
+## Release ownership
 
-`docs/ISSUE_WORKFLOW.md` is the canonical release state machine. After its bootstrap anchor and unique immutable active-policy chain are verified, the operator may audit and normally merge a clean implementation or generated release PR without routine reauthorization only when its exact head/base/non-null tested integration and current non-bypassable server exact-base guard remain bound to the outer-operator-verified canonical bundle/artifacts and independent byte-complete semantic verdict. A protected successor policy merge blocks new release work until predecessor-bound work is terminal. Only `preSelectionPolicyQuiescence` with absent current mutex/start and a blocker-free closed classification of every permanent prior start may enumerate `policy-transition-pending`: each prior start is fully completed or its abort is uniquely suppressed by a later authority/lineage/spend/subject-equal resolution-bound completion, while unresolved/current/competing/unsuppressed/malformed starts and conflicting resolutions block and remain visible. Once selected, exact-bound-mutex/start `selectedPolicyTransitionQuiescence` retains and revalidates that byte-identical historical set through one all-or-nothing transaction creating successor activation/supersession, optional unchanged-root `root-activation:v2`, recovery result, and terminal while deleting the exact mutex; changed history or a new start rejects the transition. Rejection leaves the predecessor active, and terminal-only `policy-transition-completed` never re-enters release selection. Every merge uses the fixed attempt/outcome/result operation and normal method `merge`.
+`docs/ISSUE_WORKFLOW.md` is the process of record. The operator decides when a slice is complete, audits the exact release candidate, obtains an independent review of that head, merges it with a normal merge commit, monitors publication, and verifies the result. Routine reauthorization is not required.
 
-GitHub Actions owns publication. The operator owns audit, guarded merge-operation recording, workflow observation, registry/provenance verification, evidence, tracker finalization, and queue continuation. A head change, default-branch advance, changed tested integration, exact-base-guard change, or changed bundle artifact invalidates validation and semantic-review evidence, not `standing-policy`; it never preserves or revives an expired `session-direct-active-kiro-user` instruction. A missing or unprovable non-bypassable guard stops under the existing capability/permission escalation. Authority is accepted only through the canonical disjoint union: routine `standing-policy`, positive-channel `durable-independent-human`, or exact-subject/decision, one-use, same-runtime `session-direct-active-kiro-user`; every human statement binds the closed subject bytes and atomically consumes the expected-absent authority-use ref with its domain's first mutation. An ordinary comment or API `User` attribution is never durable human provenance. Apply `human-required` only for a canonical [genuine escalation](ISSUE_WORKFLOW.md#genuine-escalation).
+GitHub Actions owns publication through npm trusted publishing. A head change, default-branch advance, or new commit invalidates the earlier validation and review evidence for that candidate, so audit and review the new head instead. Apply `human-required` only for a [genuine escalation](ISSUE_WORKFLOW.md#genuine-escalation).
 
 ## Slice-based release flow
 
-1. Activate the earliest dependency-eligible release tracker only when its current title/body/milestone fingerprint and canonical checklist hash are already authorized by `standing-policy`; use `root-activation:v2` keyed by the unique active policy SHA. This root-activation protocol has no generic human-authority shortcut. A genuine escalation first completes through the specific protected-process, canonical-decision, or recovery-resolution schema whose exact statement and one-use record validate; an ordinary comment is never durable human provenance.
-2. Assign every public-change issue to that milestone and tracker, require its own accepted fingerprint, and preserve the approved capability budget.
+1. Work the earliest dependency-eligible release tracker and keep its child issues inside the approved capability budget.
+2. Assign every public-change issue to that milestone and tracker.
 3. Add a semver-correct Changeset to every implementation PR that changes public behavior, API, dependencies, or compatibility.
-4. Open each implementation PR with review pending, have the outer operator construct and verify its canonical `semantic-review-bundle:v1`, deliver every deterministic artifact attachment byte to the independent read-only reviewer, obtain semantic review bound to that exact contract/patch/evidence and head/current base/non-null tested integration/current guard or truthful review-only absence, and normally merge only after every current contract, CI, package, trailer, non-bypassable exact-base, and fixed-operation precondition passes.
-5. Verify the merge commit on `main`, issue closure, release-impact evidence, and post-merge CI before retiring its WIP slot and continuing.
-6. Let the `Publish` workflow open or update `chore: release packages` from accumulated Changesets. Do not treat its existence as release readiness.
-7. Keep the generated PR open while canonical slice issues remain incomplete.
-8. Audit the complete slice and generated PR's exact head/current base/non-null tested integration/current strict guard; verify and record its canonical review-bundle hash, expected semantic version, and evidence, then apply `status:release-ready` without a routine `human-required` label.
-9. Requery that exact integration/guard and execute the one fixed normal-merge attempt/outcome/result operation with expected head SHA and method `merge`.
+4. Open each implementation PR, obtain an independent review of its exact head, and merge with a normal merge commit once CI, packaging, and the trailer requirement all pass.
+5. Verify the merge commit on `main`, issue closure, release impact, and post-merge CI, then delete the branch and continue.
+6. Let the `Publish` workflow open or update `chore: release packages` from accumulated Changesets. Its existence is not release readiness.
+7. Keep the generated PR open while slice issues remain incomplete, so the slice ships under one version.
+8. Audit the complete slice and the generated PR's exact head, record the expected version and evidence, then apply `status:release-ready`.
+9. Merge that exact head with a normal merge commit, sending the expected head SHA.
 10. Monitor the resulting `Publish` run to a terminal conclusion and verify the registry package, dist-tag, provenance, and source commit before marking the slice released.
 
 Changesets does not wait for GitHub milestones. A generated release PR appearing after the first qualifying implementation merge is expected. An automation-created release PR may show `action_required` with no PR-event jobs because an automation-created event did not retrigger CI; that status alone is not a release blocker when the preceding feature PR and current `main` workflows passed and the generated diff is purely mechanical. The exact release candidate still requires the full local, artifact, semantic, and workflow audit below.
@@ -35,25 +35,23 @@ Do not edit package versions or changelogs manually. Do not run Changesets versi
 
 Before applying `status:release-ready`, verify and record:
 
-- tracker #5's current fingerprint/program-map/recovery state, including the bootstrap anchor and unique active-policy chain or predecessor-bound pending cutover, fixed mutex, blocker-free terminal-history classifier in which every prior start is fully completed or uniquely suppressed after abort, proof that no unresolved/current/competing/unsuppressed/malformed start, conflicting resolution, unsuppressed aborted subject, currently qualified resolution, malformed/forked lineage, or unsuperseded stale/expired generation passes the gate, plus the active policy-scoped root fingerprint/checklist activation;
-- every canonical seed/receipt-backed issue, accepted fingerprint, dependency, normal-merged implementation PR, decision that passes `validateDecisionClosure` through one canonical `decision-closure-result:v1` or the sole exact issue #16 adapter, and deferral;
+- every slice issue closed by a merged implementation PR, every decision recorded, and every deferral tracked in a visible follow-up issue;
 - one coherent capability within the accepted component and foundation budget;
-- every public change's Changeset and the generated SemVer/changelog result;
-- exact release PR number, head SHA, current default-branch tip/base SHA, non-null tested merge-ref/tree SHA, exact-base guard projection, source branch, mergeability, author, and complete diff;
+- every public change's Changeset and the generated SemVer and changelog result;
+- the release PR number, head SHA, current default-branch tip, mergeability, and complete diff, confirming the diff is only the mechanical version, changelog, and consumed-Changeset result;
 - public exports, generated declarations, consumer documentation, deterministic showcase states, compatibility, and license files;
-- packed-file allowlist, tarball contents, package metadata, repository URL, and absence of credentials or app-only content;
+- packed-file allowlist, tarball contents, package metadata, repository URL, and the absence of credentials or app-only content;
 - `npm run validate` at the candidate SHA;
 - `npm run verify:package` at the candidate SHA;
 - `npx expo install --check` from `apps/showcase`;
-- required implementation, `main`, CI, and Publish-preparation workflows;
-- an independent `semantic-review:v1` verdict of `pass` after byte-complete semantic inspection, bound to the exact release head and the outer operator's verified `semantic-review-bundle:v1` manifest/hash/artifacts; and
-- visible later issues for every deferral or follow-up.
+- the implementation, `main`, and CI workflows for that candidate; and
+- an independent review of the exact release head.
 
-The release-audit record binds all evidence, the unique active-policy chain terminal, expected package version/dist-tag, current fingerprints/hashes, exact PR head, reviewed default-branch tip, non-null tested integration, exact-base guard, canonical review-bundle hash/artifact identities, reviewer identity/type, findings/resolutions, residual risks, and UTC/comment identity. Any head, base, tested-integration, guard, or bundle-artifact change requires a new audit and semantic review.
+Record the evidence, the expected version and dist-tag, the exact head, the reviewer, findings and resolutions, and residual risks on the tracker. Any new commit on the candidate requires a fresh audit and review.
 
-## Normal release merge
+## Release merge
 
-Immediately before merge, freshly requery every audit fact, including the PR head, default-branch tip, non-null tested integration, required check runs, protection/ruleset state, and executor permission/bypass facts. Merge only when the reviewed integration and canonical bundle remain current, conflict-free, non-draft, green under applicable checks, mechanically scoped to the audited Changesets result, free of unresolved recovery/escalation state, and protected by strict required-status-check enforcement that the authenticated executor cannot bypass. A final read is not an atomic base guard; the live server rule must reject base drift.
+Immediately before merging, requery the PR head, the default-branch tip, mergeability, and the required checks. Merge only when the reviewed head is current, conflict-free, non-draft, green, and mechanically scoped to the audited Changesets result, using a normal merge commit with the expected head SHA.
 
 Compare-and-create the fixed merge-attempt ref before the one GitHub merge `PUT`; only its winning invocation may send the exact head SHA with method `merge`. Persist exactly one fixed observed, authenticated response-rejected (exact positive status and response-body-byte hash, including deterministic empty body), winner-only pre-send-not-sent, or request-indeterminate outcome and the verified merge result only when successful. Not-sent/indeterminate/rejected outcomes have no result, and the same logical request is never retried or later converted to success; these dedicated merge outcomes remain distinct from the common POST schema. Never squash, rebase, bypass protection, fabricate approval, enable auto-merge as a bypass, update `main` directly, or merge a stale/failing/conflicting/unreviewed release candidate. If the strict non-bypassable guard is absent or unprovable, stop under the existing capability/permission escalation. Verify the result's exact reviewed base/head parents, tested tree, and `main` containment before treating the transaction as complete.
 
